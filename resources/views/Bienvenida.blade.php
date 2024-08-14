@@ -12,7 +12,7 @@
             <div class="col-md-6 text-center">
                 <h1>Bienvenida!</h1>
                 <p>Este es un ejemplo de página</p>
-                <a href="{{ url('Fechas/index') }}" class="btn btn-secondary">Empezar</a>
+                <a href="{{ route('Fechas.index')}}" class="btn btn-secondary">Empezar</a>
             </div>
         </div>
     </div>

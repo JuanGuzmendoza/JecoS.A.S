@@ -8,20 +8,58 @@ use Illuminate\Http\Request;
 class FechasentregaController extends Controller
 {
 
-    // function show()
-    // {
-    //     $F=Fechasentrega::all();
-    //     return view('Fechas', ['Fechas' => $F]);
-    // }
-    function index()
+    public function show($mes)
     {
-        $F=Fechasentrega::all();
+        $F = Fechasentrega::all();
         return view('Fechas', ['Fechas' => $F]);
     }
-    function store(Request $request)
+    public function index($id)
     {
-        $Fecha = Fechasentrega::create(['cliente'=>$request->cliente]);
+        $F = Fechasentrega::all();
+        return view('Fechas', ['Fechas' => $F]);
+    }
+    public function store(Request $request,$mes)
+    {
+        $Fecha = Fechasentrega::create(['cliente' => $request->cliente,'mes' => $mes]);
         $Fecha->save();
-         return redirect('Fechas');
+        switch ($mes) {
+            case '1':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '2':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '3':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '4':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '5':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+        }
+        return view('Fechas',compact('mes','Fechas'));
+    }
+    public function mes($mes)
+    {
+        switch ($mes) {
+            case '1':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '2':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '3':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '4':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+            case '5':
+                $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
+                break;
+        }
+        return view('Fechas',compact('mes','Fechas'));
     }
 }

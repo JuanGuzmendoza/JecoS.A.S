@@ -18,4 +18,7 @@ Route::get('/', function () {
     return view('Bienvenida');
 });
 Route::resource('/Fechas', FechasentregaController::class);
-
+Route::controller(FechasentregaController::class)->group(function(){
+    Route::get('Fechas/{mes}/mes', 'mes')->name('ver_mes');
+    Route::post('Fechas/{mes}/guardar', 'store')->name('guardar_registro');
+});

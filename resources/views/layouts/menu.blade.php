@@ -24,19 +24,19 @@
 		  		<h1><a href="index.html" class="logo">JECO</a></h1>
 	        <ul class="list-unstyled components mb-5">
 	          <li>
-	            <a href="{{route('ver_mes',1)}}"></span>Enero</a>
+	            <a href="{{route('Fechas.show',1)}}"></span>Enero</a>
 	          </li>
 	          <li>
-				<a href="{{route('ver_mes',2)}}"></span>Febrero</a>
+				<a href="{{route('Fechas.show',2)}}"></span>Febrero</a>
 	          </li>
 	          <li>
-	            <a href="{{route('ver_mes',3)}}"></span>Marzo</a>
+	            <a href="{{route('Fechas.show',3)}}"></span>Marzo</a>
 	          </li>
 	          <li>
-				<a href="{{route('ver_mes',4)}}"></span>Abril</a>
+				<a href="{{route('Fechas.show',4)}}"></span>Abril</a>
 	          </li>
 	          <li>
-				<a href="{{route('ver_mes',5)}}"></span>Mayo</a>
+				<a href="{{route('Fechas.show',5)}}"></span>Mayo</a>
 	          </li>
 	        </ul>
 	      </div>
@@ -55,3 +55,4 @@
     <script src="{{asset('js/main.js')}}"></script>
   </body>
 </html>
+

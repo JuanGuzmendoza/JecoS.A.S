@@ -60,7 +60,7 @@
                                 placeholder="Ingrese cliente">
                         </div>
                         <!-- Agrega más campos para cada columna de la tabla -->
-                        <a href="{{ route('ver_mes', $mes) }}" class="btn btn-secondary">Regresar</a>
+                        <a href="{{ route('Fechas.show',$mes) }}" class="btn btn-secondary">Regresar</a>
                         <button type="sumit" class="btn btn-success">Guardar</button>
                     </form>
                 </div>
@@ -95,11 +95,10 @@
                 @endswitch
             </h2>
             <div class="table-responsive">
-                <table class="table table-striped custom-table">
+                <table class="table table-striped table-hover custom-table">
                     <thead>
                         <tr>
                             <!-- COLUMNAS -->
-
                             <th scope="col">ID</th>
                             <th scope="col">Cliente</th>
                             <th scope="col">Fecha entrega</th>
@@ -125,6 +124,8 @@
                     <tbody>
                         <!-- FILAS -->
                         @foreach ($Fechas as $f)
+
+                        <tr data-id="{{ $f->id }}" onclick="selectRow(this)">
                             <td>{{ $f->id }}</td>
                             <td>{{ $f->cliente }}</td>
 
@@ -147,83 +148,94 @@
                             <td><input type="text" class="money-input" oninput="handleInput(event)" placeholder="0"></td>
 
                             <!-- COSTO TOTAL -->
-                            <td><input type="text" class="money-input" oninput="handleInput(event)" placeholder="0"
-                                    disabled></td>
+                            <td><input type="text" class="money-input" oninput="handleInput(event)" placeholder="0" disabled></td>
+
                             <!-- BARRAS DE PROGRESO -->
                             <td>
-                                <div class="progress-circle" id="1{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->c_tela }}"
-                                        oninput="updateProgress(this.value, '1{{ $f->id }}')">
+                                <div class="progress-circle" id="1{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->c_tela}}" oninput="updateProgress(this.value, '1{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="2{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->cost }}"
-                                        oninput="updateProgress(this.value, '2{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="2{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->cost}}" oninput="updateProgress(this.value, '2{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="3{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->c_mad }}"
-                                        oninput="updateProgress(this.value, '3{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="3{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->c_mad}}" oninput="updateProgress(this.value, '3{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="4{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->arm }}"
-                                        oninput="updateProgress(this.value, '4{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="4{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->arm}}" oninput="updateProgress(this.value, '4{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="5{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->emparr }}"
-                                        oninput="updateProgress(this.value, '5{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="5{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->emparr}}" oninput="updateProgress(this.value, '5{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="6{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->c_esp }}"
-                                        oninput="updateProgress(this.value, '6{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="6{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->c_esp}}" oninput="updateProgress(this.value, '6{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="7{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->p_blan }}"
-                                        oninput="updateProgress(this.value, '7{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="7{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->p_blan}}" oninput="updateProgress(this.value, '7{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="8{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->tapic }}"
-                                        oninput="updateProgress(this.value, '8{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="8{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->tapic}}" oninput="updateProgress(this.value, '8{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="9{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->ensam }}"
-                                        oninput="updateProgress(this.value, '9{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="9{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->ensam}}" oninput="updateProgress(this.value, '9{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="10{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->despa }}"
-                                        oninput="updateProgress(this.value, '10{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="10{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->despa}}" oninput="updateProgress(this.value, '10{{$f->id}}')">
                                 </div>
-                            </td>
-                            <td>
-                                <div class="progress-circle" id="-11{{ $f->id }}">
-                                    <input type="number" min="0" max="100" value="{{ $f->nieves }}"
-                                        oninput="updateProgress(this.value, '-11{{ $f->id }}')">
+                              </td>
+                              <td>
+                                <div class="progress-circle" id="-11{{$f->id}}">
+                                  <input type="number" min="0" max="100" value="{{$f->nieves}}" oninput="updateProgress(this.value, '-11{{$f->id}}')">
                                 </div>
-                            </td>
-
-                            <tr>
-                                <!-- CLIENTE -->
+                              </td>
+                            <!-- Agrega los demás campos con el mismo formato -->
+                        </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
+
+            <script>
+           function selectRow(row) {
+        // Remueve la clase 'table-active' de todas las filas y deshabilita todas las entradas
+        document.querySelectorAll('.custom-table tr').forEach(tr => {
+            tr.classList.remove('table-active');
+            tr.querySelectorAll('input').forEach(input => {
+                input.disabled = true;
+            });
+        });
+
+        // Agrega la clase 'table-active' a la fila seleccionada
+        row.classList.add('table-active');
+
+        // Habilita las entradas de la fila seleccionada
+        row.querySelectorAll('input').forEach(input => {
+            input.removeAttribute('disabled');
+        });
+
+        // Recupera la ID de la fila seleccionada
+        const id = row.getAttribute('data-id');
+        console.log('ID de la fila seleccionada:', id);
+    }
+            </script>
         </div>
     </div>
     <style>

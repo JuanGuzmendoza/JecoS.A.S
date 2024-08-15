@@ -214,27 +214,29 @@
             </div>
 
             <script>
-           function selectRow(row) {
-        // Remueve la clase 'table-active' de todas las filas y deshabilita todas las entradas
-        document.querySelectorAll('.custom-table tr').forEach(tr => {
-            tr.classList.remove('table-active');
-            tr.querySelectorAll('input').forEach(input => {
-                input.disabled = true;
-            });
-        });
-
-        // Agrega la clase 'table-active' a la fila seleccionada
-        row.classList.add('table-active');
-
-        // Habilita las entradas de la fila seleccionada
-        row.querySelectorAll('input').forEach(input => {
-            input.removeAttribute('disabled');
-        });
-
-        // Recupera la ID de la fila seleccionada
-        const id = row.getAttribute('data-id');
-        console.log('ID de la fila seleccionada:', id);
+        function selectRow(row) {
+  // Deshabilita las entradas de todas las filas excepto la seleccionada
+  document.querySelectorAll('.custom-table tr').forEach(tr => {
+    if (tr !== row) {
+      tr.classList.remove('table-active');
+      tr.querySelectorAll('input').forEach(input => {
+        input.disabled = true;
+      });
     }
+  });
+
+  // Agrega la clase 'table-active' a la fila seleccionada
+  row.classList.add('table-active');
+
+  // Habilita las entradas de la fila seleccionada
+  row.querySelectorAll('input').forEach(input => {
+    input.disabled = false;
+  });
+
+  // Recupera la ID de la fila seleccionada
+  const id = row.getAttribute('data-id');
+  console.log('ID de la fila seleccionada:', id);
+}
             </script>
         </div>
     </div>

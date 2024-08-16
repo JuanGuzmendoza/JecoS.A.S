@@ -23,8 +23,7 @@ class FechasentregaController extends Controller
     {
         $Fecha = Fechasentrega::create(['cliente' => $request->cliente,'mes' => $mes]);
         $Fecha->save();
-        $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
-        return redirect()->route('Fechas.index',);
+        return redirect()->route('Fechas.show',$mes);
     }
     public function mes($mes)
     {
@@ -42,6 +41,7 @@ class FechasentregaController extends Controller
         //     'ficha_id'=>'required',
         // ]);
         $F= Fechasentrega::find($id);
+        $cost_total=$request->cant*$request->cost_unit;
         $F->update([
             // 'cliente' => $request->documento,
             'entrega' => $request->entrega,
@@ -50,7 +50,7 @@ class FechasentregaController extends Controller
             // 'nombre' => $request->telefono,
             'cant' => $request->cant,
             'cost_unit' => $request->cost_unit,
-            'cost_total' => $request->cost_total,
+            'cost_total' => $cost_total,
             'c_tela' => $request->c_tela,
             'cost' => $request->cost,
             'c_mad' => $request->c_mad,
@@ -64,6 +64,6 @@ class FechasentregaController extends Controller
             'nieves' => $request->nieves,
 
         ]);
-        return redirect()->route('Fechas.index',);
+        return redirect()->route('Fechas.show',$F->mes);
     }
 }

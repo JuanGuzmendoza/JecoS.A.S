@@ -10,7 +10,7 @@
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-6 text-center">
-                <h1>Bienvenida!</h1>
+                <h1>Bienvenidaa!</h1>
                 <p>Este es un ejemplo de página</p>
                 <a href="{{ route('Fechas.index')}}" class="btn btn-secondary">Empezar</a>
             </div>

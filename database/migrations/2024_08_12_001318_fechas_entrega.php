@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('entrega')->nullable();
             $table->integer('oc')->nullable();
             $table->integer('codigo')->nullable();
-            $table->string('nomnbre')->nullable();
+            $table->string('nombre')->nullable();
             $table->integer('cant')->nullable();
             $table->integer('cost_unit')->nullable();
             $table->integer('cost_total')->nullable();

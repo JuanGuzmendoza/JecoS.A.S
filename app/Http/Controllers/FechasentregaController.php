@@ -24,11 +24,46 @@ class FechasentregaController extends Controller
         $Fecha = Fechasentrega::create(['cliente' => $request->cliente,'mes' => $mes]);
         $Fecha->save();
         $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
-        return view('Fechas',compact('mes','Fechas'));
+        return redirect()->route('Fechas.index',);
     }
     public function mes($mes)
     {
         $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
         return view('Fechas',compact('mes','Fechas'));
+    }
+    public function update(Request $request,$id)
+    {
+        // $request->validate([
+        //     'documento'=>'required|max:225',
+        //     'nombre'=>'required|max:225',
+        //     'apellido'=>'required|max:225',
+        //     'correo'=>'required|max:225',
+        //     'telefono'=>'required|max:225',
+        //     'ficha_id'=>'required',
+        // ]);
+        $F= Fechasentrega::find($id);
+        $F->update([
+            // 'cliente' => $request->documento,
+            'entrega' => $request->entrega,
+            // 'oc' => $request->apellido,
+            // 'codigo' => $request->correo,
+            // 'nombre' => $request->telefono,
+            'cant' => $request->cant,
+            'cost_unit' => $request->cost_unit,
+            'cost_total' => $request->cost_total,
+            'c_tela' => $request->c_tela,
+            'cost' => $request->cost,
+            'c_mad' => $request->c_mad,
+            'arm' => $request->arm,
+            'emparr' => $request->emparr,
+            'c_esp' => $request->c_esp,
+            'p_blan' => $request->p_blan,
+            'tapic' => $request->tapic,
+            'ensam' => $request->ensam,
+            'despa' => $request->despa,
+            'nieves' => $request->nieves,
+
+        ]);
+        return redirect()->route('Fechas.index',);
     }
 }

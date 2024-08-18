@@ -33,6 +33,7 @@ return new class extends Migration
             $table->integer('despa')->nullable();
             $table->integer('nieves')->nullable();
             $table->integer('mes');
+            $table->integer('año');
             $table->timestamps();
         });
     }

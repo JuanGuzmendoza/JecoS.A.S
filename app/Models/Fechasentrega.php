@@ -30,5 +30,6 @@ class Fechasentrega extends Model
         'despa',
         'nieves',
         'mes',
+        'año',
     ];
 }

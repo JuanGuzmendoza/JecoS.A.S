@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class FechasentregaController extends Controller
 {
-
+   public function ver_año($mes,$año){
+    $F = Fechasentrega::where([['mes', '=', $mes],['año', '=', $año]])->get();
+    return view('Fechas', ['Fechas' => $F,'mes'=>$mes,'año'=>$año]);
+   }
     public function show($mes)
     {
         $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
@@ -19,11 +22,11 @@ class FechasentregaController extends Controller
         $F = Fechasentrega::where('mes', '=', $mes)->get();
         return view('Fechas', ['Fechas' => $F,'mes'=>$mes]);
     }
-    public function store(Request $request,$mes)
+    public function store(Request $request,$mes,$año)
     {
-        $Fecha = Fechasentrega::create(['cliente' => $request->cliente,'mes' => $mes]);
+        $Fecha = Fechasentrega::create(['cliente' => $request->cliente,'mes' => $mes,'año'=>$año]);
         $Fecha->save();
-        return redirect()->route('Fechas.show',$mes);
+        return redirect()->route('ver_año',['mes'=>$mes,'año'=>$año]);
     }
     public function mes($mes)
     {

@@ -50,7 +50,7 @@
 
                 <div class="modal-body">
                     <!-- Formulario para agregar fila -->
-                    <form action="{{ route('guardar_registro', $mes) }}" method="post">
+                    <form action="{{ route('guardar_registro',['mes'=>$mes,'año'=>$año]) }}" method="post">
                         @csrf
 
                         <div class="form-group">
@@ -308,7 +308,25 @@
 
     <script type="text/javascript"></script>
     </body>
-
+    <nav class="navbar fixed-bottom navbar-light bg-light justify-content-center">
+        <ul class="nav nav-pills justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>$año])}}">Enero</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>2,'año'=>$año])}}">Febrero</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>3,'año'=>$año])}}">Marzo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>4,'año'=>$año])}}">Abril</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>5,'año'=>$año])}}">Mayo</a>
+          </li>
+        </ul>
+      </nav>
     </html>
 @endsection
 <style>

@@ -12,7 +12,13 @@
             <div class="col-md-6 text-center">
                 <h1>Bienvenidaa!</h1>
                 <p>Este es un ejemplo de página</p>
-                <a href="{{ route('Fechas.index')}}" class="btn btn-secondary">Empezar</a>
+                <?php
+                $mes = date('m');
+                $año = date('Y');
+                ?>
+                {{$mes}}
+                {{{$año}}}
+                <a href="{{route('ver_año',['mes'=>1,'año'=>$año=2024])}}" class="btn btn-secondary">Empezar</a>
             </div>
         </div>
     </div>

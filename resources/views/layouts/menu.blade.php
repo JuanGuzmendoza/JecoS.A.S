@@ -23,21 +23,21 @@
 				<div class="p-4">
 		  		<h1><a href="index.html" class="logo">JECO</a></h1>
 	        <ul class="list-unstyled components mb-5">
-	          <li>
-	            <a href="{{route('Fechas.show',1)}}"></span>Enero</a>
-	          </li>
-	          <li>
-				<a href="{{route('Fechas.show',2)}}"></span>Febrero</a>
-	          </li>
-	          <li>
-	            <a href="{{route('Fechas.show',3)}}"></span>Marzo</a>
-	          </li>
-	          <li>
-				<a href="{{route('Fechas.show',4)}}"></span>Abril</a>
-	          </li>
-	          <li>
-				<a href="{{route('Fechas.show',5)}}"></span>Mayo</a>
-	          </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2024])}}">2024</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2025])}}">2025</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2026])}}">2026</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2027])}}">2027</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2028])}}">2028</a>
+                  </li>
 	        </ul>
 	      </div>
     	</nav>

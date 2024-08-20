@@ -325,6 +325,27 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('ver_año',['mes'=>5,'año'=>$año])}}">Mayo</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>6,'año'=>$año])}}">junio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>7,'año'=>$año])}}">julio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>8,'año'=>$año])}}">agosto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>9,'año'=>$año])}}">septiembre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>10,'año'=>$año])}}">octube</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>11,'año'=>$año])}}">noviembre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('ver_año',['mes'=>12,'año'=>$año])}}">diciembre</a>
+          </li>
         </ul>
       </nav>
     </html>

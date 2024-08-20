@@ -65,8 +65,7 @@ class FechasentregaController extends Controller
             'ensam' => $request->ensam,
             'despa' => $request->despa,
             'nieves' => $request->nieves,
-
         ]);
-        return redirect()->route('Fechas.show',$F->mes);
+        return redirect()->route('ver_año',['mes'=>$F->mes,'año'=>$F->año]);
     }
 }

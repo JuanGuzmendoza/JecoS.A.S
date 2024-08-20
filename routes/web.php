@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\FechasentregaController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,6 @@ Route::controller(FechasentregaController::class)->group(function(){
     Route::post('/Fechas/{mes}/{año}/guardar', 'store')->name('guardar_registro');
     Route::get('/Fechas/{mes}/{año}', 'ver_año')->name('ver_año');
 });
+Route::get('excel', [ExcelController::class,'form']);
+Route::post('excel', [ExcelController::class,'import']);
+

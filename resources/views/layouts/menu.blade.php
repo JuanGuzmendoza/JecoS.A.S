@@ -20,7 +20,13 @@
 	          <span class="sr-only">Menú</span>
 	        </button>
         </div>
-      
+        <form action="{{route('importar')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="file">
+            <br>
+            <input type="submit" value="IMPORTAR">
+        </form>
+
 				<div class="p-4">
 		  		<h1><a href="index.html" class="logo">JECO</a></h1>
 	        <ul class="list-unstyled components mb-5">

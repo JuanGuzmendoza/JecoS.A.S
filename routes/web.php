@@ -27,4 +27,5 @@ Route::controller(FechasentregaController::class)->group(function(){
 // Route::post('excel', [ExcelController::class,'import']);
 Route::controller(ExcelController::class)->group(function(){
     Route::post('/Excel', 'import')->name('importar');
+    Route::get('/Excel/export', 'export')->name('exportar');
 });

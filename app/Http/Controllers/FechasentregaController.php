@@ -8,14 +8,13 @@ use Illuminate\Http\Request;
 class FechasentregaController extends Controller
 {
    public function ver_año($mes,$año){
-    $F = Fechasentrega::where([['mes', '=', $mes],['año', '=', $año]])->get();
-    return view('Fechas', ['Fechas' => $F,'mes'=>$mes,'año'=>$año]);
-   }
-    public function show($mes)
-    {
-        $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
-        return view('Fechas',compact('mes','Fechas'));
+    $F = Fechasentrega::where([['mes', '=', $mes],['año', '=', $año]])->orderBy('entrega','ASC')->get();
+    $total=0;
+    foreach ($F as $Fechas) {
+        $total+=$Fechas->cost_total;
     }
+    return view('Fechas', ['Fechas' => $F,'mes'=>$mes,'año'=>$año,'total'=>$total]);
+   }
     public function index()
     {
         $mes=1;

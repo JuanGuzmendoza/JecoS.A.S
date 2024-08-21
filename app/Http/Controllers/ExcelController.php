@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FechasExport;
 use App\Models\Fechasentrega;
 use Illuminate\Http\Request;
 use  App\Imports\DataImport;
@@ -22,5 +23,11 @@ class ExcelController extends Controller
      return redirect()->route('ver_año',['mes'=>$mes,'año'=>$año]);
  }
 
+ public function export(){
+    return Excel::download(new FechasExport,'fechas.xlsx');
+    // $mes=date('m');
+    // $año=date('Y');
+    // return redirect()->route('ver_año',['mes'=>$mes,'año'=>$año]);
+ }
 
 }

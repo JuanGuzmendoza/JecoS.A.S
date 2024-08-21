@@ -143,7 +143,11 @@
                     </div>
                 </div>
             </div>
-
+           <a>Total:{{$total}}</a><br>
+           <a>Registros:{{$Fechas->count()}}</a>
+           <li class="nav-item">
+            <a class="nav-link" href="{{route('exportar')}}">Exportar</a>
+          </li>
             <div class="container-fluid">
                 <div class="table-responsive d-none d-md-table">
                     <table id="myTable" class="table table-borderles table-hover custom-table table-sm w-100">
@@ -186,7 +190,7 @@
                                         <td>{{ $f->cliente }}</td>
 
                                         <!-- FECHA ENTREGA -->
-                                        <td><input type="date" class="rounded border " value="{{ $f->entrega }}"></td>
+                                        <td><input name="entrega" type="date" class="rounded border"value="{{$f->entrega}}"></td>
 
                                         <!-- OC -->
                                         <td>{{ $f->oc }}</td>

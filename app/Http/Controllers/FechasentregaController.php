@@ -34,14 +34,7 @@ class FechasentregaController extends Controller
     }
     public function update(Request $request,$id)
     {
-        // $request->validate([
-        //     'documento'=>'required|max:225',
-        //     'nombre'=>'required|max:225',
-        //     'apellido'=>'required|max:225',
-        //     'correo'=>'required|max:225',
-        //     'telefono'=>'required|max:225',
-        //     'ficha_id'=>'required',
-        // ]);
+
         $F= Fechasentrega::find($id);
         $cost_total=$request->cant*$request->cost_unit;
         $F->update([

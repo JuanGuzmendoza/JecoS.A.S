@@ -146,7 +146,7 @@
            <a>Total:{{$total}}</a><br>
            <a>Registros:{{$Fechas->count()}}</a>
            <li class="nav-item">
-            <a class="nav-link" href="{{route('exportar')}}">Exportar</a>
+            <a class="nav-link" href="{{route('exportar',['mes'=>$mes,'año'=>$año])}}">Exportar</a>
           </li>
             <div class="container-fluid">
                 <div class="table-responsive d-none d-md-table">

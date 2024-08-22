@@ -10,11 +10,20 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class FechasExport implements FromView, WithStyles
 {
+    private $mes;
+    private $año;
+
+    public function __construct($mes, $año)
+    {
+        $this->mes = $mes;
+        $this->año = $año;
+    }
     public function view(): View
     {
+
         return view('export_fechas', [
-            'Fechas' => Fechasentrega::all()
-        ]);
+            'Fechas' =>Fechasentrega::where([['mes', '=', $this->mes],['año', '=', $this->año]])->orderBy('entrega','ASC')->get()
+        ,'mes'=>$this->mes,'año'=>$this->año]);
     }
 
     public function styles(Worksheet $sheet)

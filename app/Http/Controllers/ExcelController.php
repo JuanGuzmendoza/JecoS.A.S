@@ -23,11 +23,8 @@ class ExcelController extends Controller
      return redirect()->route('ver_año',['mes'=>$mes,'año'=>$año]);
  }
 
- public function export(){
-    return Excel::download(new FechasExport,'fechas.xlsx');
-    // $mes=date('m');
-    // $año=date('Y');
-    // return redirect()->route('ver_año',['mes'=>$mes,'año'=>$año]);
+ public function export($mes,$año){
+    return Excel::download(new FechasExport($mes,$año),'fechas.xlsx');
  }
 
 }

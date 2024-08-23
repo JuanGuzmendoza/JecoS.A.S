@@ -35,7 +35,7 @@
                 <td>{{ $f->cost_unit }}</td>
                 <td>{{ $f->cost_total }}</td>
                 <td>{{ $f->c_tela }}</td>
-                <td>{{ $f->costura }}</td>
+                <td>{{ $f->cost }}</td>
                 <td>{{ $f->c_mad }}</td>
                 <td>{{ $f->arm }}</td>
                 <td>{{ $f->emparr }}</td>

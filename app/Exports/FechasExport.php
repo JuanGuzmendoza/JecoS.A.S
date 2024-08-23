@@ -42,7 +42,7 @@ class FechasExport implements FromView, WithStyles, WithTitle
 
         //cambiar la parte de mandar meses y año para solo usar la propia coleccion del modelo de fechas
         return view('export_fechas', [
-            'Fechas' => Fechasentrega::where([['mes', '=',$indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get(),
+            'Fechas' => Fechasentrega::where([['mes', '=', $indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get(),
             'mes' => $this->mes,
             'año' => $this->año
         ]);
@@ -50,10 +50,76 @@ class FechasExport implements FromView, WithStyles, WithTitle
 
     public function styles(Worksheet $sheet)
     {
+        $trabajos = [
+            0 => "c_tela",
+            1 => "cost",
+            2 => "c_mad",
+            3 => "arm",
+            4 => "emparr",
+            5 => "c_esp",
+            6 => "p_blan",
+            7 => "tapic",
+            8 => "ensam",
+            9 => "despa",
+            10 => "nieves",
+        ];
+        $indice = [
+            "enero" => 1,
+            "febrero" => 2,
+            "marzo" => 3,
+            "abril" => 4,
+            "mayo" => 5,
+            "junio" => 6,
+            "julio" => 7,
+            "agosto" => 8,
+            "septiembre" => 9,
+            "octubre" => 10,
+            "noviembre" => 11,
+            "diciembre" => 12,
+        ];
+
+        $sheet->getStyle('A1:S' . $sheet->getHighestRow())->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+
+        // Agregar sombreado a la tabla
+        $sheet->getStyle('A1:S' . $sheet->getHighestRow())->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+        $sheet->getStyle('A1:S' . $sheet->getHighestRow())->getFill()->getStartColor()->setARGB('FFFFFF'); // Blanco
+
+        // Agregar sombreado a las celdas pares
+        $sheet->getStyle('A2:S' . $sheet->getHighestRow())->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+        $sheet->getStyle('A2:S' . $sheet->getHighestRow())->getFill()->getStartColor()->setARGB('F2F2F2'); // Gris claro
         // Estilo para los encabezados
         $sheet->getStyle('A1:S1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
         $sheet->getStyle('A1:S1')->getFill()->getStartColor()->setARGB('0000FF'); // Azul
         $sheet->getStyle('A1:S1')->getFont()->getColor()->setARGB('FFFFFF'); // Blanco
+        $Fechas = Fechasentrega::where([['mes', '=', $indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get();
+        $fila = 3; // suponiendo que la primera fila es la de encabezados
+        $i = 0;
+        $columna=9;
+        //el error esta en que aparte de que no corres las columnas titne que pasar todas las columnas de una fila entonces te toca hacer una especie de for que recorra todas las columnas de una fila 
+        foreach ($Fechas as $f) {
+            $celda = $sheet->getCellByColumnAndRow($columna, $fila); // suponiendo que la columna 2 es la que deseas pintar
+            foreach ($trabajos as $t) {
+                $tt = $t;
+                dd($f->$tt, $tt, $t);
+                if ($f->$tt >= 70) {
+                    $celda->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                    $celda->getStyle()->getFill()->getStartColor()->setARGB('00FF00'); // Verde
+                }
+                if ($f->$tt >= 25 and $f->$tt < 70) {
+                    $celda->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                    $celda->getStyle()->getFill()->getStartColor()->setARGB('FFA07A'); // Naranjoso
+                }
+                if ($f->$tt < 25) {
+                    $celda->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                    $celda->getStyle()->getFill()->getStartColor()->setARGB('FF0000'); // Rojo
+
+                }
+            }
+
+            $fila++;
+        }
+        // Agregar bordes a la tabla
+
     }
     public function title(): string
     {

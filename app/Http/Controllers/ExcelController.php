@@ -29,6 +29,7 @@ class ExcelController extends Controller
 
     public function export(Request $r, $mes, $año)
     {
-        return Excel::download(new MesesExport($r->meses), 'fechas.xlsx');
+        $fileName = 'fechas' . $año . '.xlsx';
+        return Excel::download(new MesesExport($r->meses,$año),$fileName);
     }
 }

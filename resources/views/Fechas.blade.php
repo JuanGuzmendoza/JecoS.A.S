@@ -1,3 +1,4 @@
+
 @extends('layouts.menu')
 
 @section('content')
@@ -11,7 +12,7 @@
         <!-- Required meta tags -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <!-- Bootstrap CSS -->
+        <!--composer require phpoffice/phpspreadsheet Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
@@ -59,17 +60,132 @@
                                 <input type="text" class="form-control" name="cliente" id="cliente"
                                     placeholder="Ingrese cliente">
                             </div>
-                            <!-- Agrega más campos para cada columna de la tabla -->
-                            <a href="{{ route('Fechas.show', $mes) }}" class="btn btn-secondary">Regresar</a>
-                            <button type="sumit" class="btn btn-success">Guardar</button>
+                            <div class="modal-footer">
+                            <button type="sumit" class="btn btn-primary">Guardar</button>
+                            </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
+             <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
+        <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#exampleModal" title="Agregar nueva fila">
+            <i class="fa-solid fa-square-plus fa-2x"></i>
+        <p>Agregar fila</p>
+        </button>
+        <button type="button" class="btn btn-light btn-icon" title="Add Column" data-toggle="modal" data-target="#importModal">
+            <i class="fa-solid fa-file-import fa-2x"></i>
+            <p>Importar excel</p>
+        </button >
+        <button type="button" class="btn btn-light btn-icon" title="Add Column" data-toggle="modal" data-target="#exportarMesesModal">
+            <i class="fa-solid fa-file-export fa-2x"></i>
+            <p>Exportar excel</p>
+        </button >
 
+        </div>
+
+
+ <div class="modal fade" id="exportarMesesModal" tabindex="-1" role="dialog" aria-labelledby="exportarMesesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title label-negro text-dark" id="exportarMesesModalLabel">Exportar meses</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{route('exportar',['mes'=>$mes,'año'=>$año])}}" method="GET">
+            <div class="form-group">
+              <label class="label-negro text-dark">Selecciona los meses:</label>
+              <div class="form-check">
+                <input type="checkbox" id="enero" name="meses[]" value="enero">
+                <label for="enero" class="form-check-label label-negro text-dark">Enero</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="febrero" name="meses[]" value="febrero">
+                <label for="febrero" class="form-check-label label-negro text-dark">Febrero</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="marzo" name="meses[]" value="marzo">
+                <label for="marzo" class="form-check-label label-negro text-dark">Marzo</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="abril" name="meses[]" value="abril">
+                <label for="abril" class="form-check-label label-negro text-dark">Abril</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="mayo" name="meses[]" value="mayo">
+                <label for="mayo" class="form-check-label label-negro text-dark">Mayo</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="junio" name="meses[]" value="junio">
+                <label for="junio" class="form-check-label label-negro text-dark">Junio</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="julio" name="meses[]" value="julio">
+                <label for="julio" class="form-check-label label-negro text-dark">Julio</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="agosto" name="meses[]" value="agosto">
+                <label for="agosto" class="form-check-label label-negro text-dark">Agosto</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="septiembre" name="meses[]" value="septiembre">
+                <label for="septiembre" class="form-check-label label-negro text-dark">Septiembre</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="octubre" name="meses[]" value="octubre">
+                <label for="octubre" class="form-check-label label-negro text-dark">Octubre</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="noviembre" name="meses[]" value="noviembre">
+                <label for="noviembre" class="form-check-label label-negro text-dark">Noviembre</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="diciembre" name="meses[]" value="diciembre">
+                <label for="diciembre" class="form-check-label label-negro text-dark">Diciembre</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit"  class="btn btn-primary">Exportar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+        <!-- MODAL IMPORT  -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Importar excel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('importar')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="file">
+                    <br>
+
+
+            </div>
+            <div  class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="IMPORTAR">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+    </div>
         <div id="mydatatable-container">
-            <h2 class="mb-5">Programacion de Fechas @switch($mes)
+            <h3 class="mb-5">Programacion de Fechas @switch($mes)
                     @case(1)
                         Enero
                     @break
@@ -120,13 +236,9 @@
 
                     @default
                 @endswitch
-            </h2>
+        </h3>
 
             <div class="g_botones">
-                <!-- Botón que abre el formulario flotante -->
-                <button type="button" class="btn btn-primary rounded" data-toggle="modal"
-                    data-target="#exampleModal">Agregar fila</button>
-
                 <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample">
                     Filtrar <i class="fa fa-chevron-down fa-xs" id="collapse-icon"></i>
 
@@ -140,41 +252,37 @@
                             <span class="bar"></span>
                             <label class="label-per">Nombre</label>
                         </div>
+
                     </div>
                 </div>
             </div>
-           <a>Total:{{$total}}</a><br>
-           <a>Registros:{{$Fechas->count()}}</a>
-           <li class="nav-item">
-            <a class="nav-link" href="{{route('exportar',['mes'=>$mes,'año'=>$año])}}">Exportar</a>
-          </li>
             <div class="container-fluid">
                 <div class="table-responsive d-none d-md-table">
                     <table id="myTable" class="table table-borderles table-hover custom-table table-sm w-100">
                         <thead>
                             <tr>
                                 <!-- COLUMNAS -->
-                                <th scope="col"></th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Fecha entrega</th>
-                                <th scope="col">OC</th>
-                                <th scope="col">Codigo</th>
-                                <th scope="col">NOMBRE</th>
-                                <th scope="col">CANT</th>
-                                <th scope="col">COSTO UNIT</th>
-                                <th scope="col">Cost total</th>
-                                <th scope="col">C.TELA</th>
-                                <th scope="col">COSTURA</th>
-                                <th scope="col">C.MAD</th>
-                                <th scope="col">ARM</th>
-                                <th scope="col">EMPARR</th>
-                                <th scope="col">C.ESP</th>
-                                <th scope="col">P.BLAN</th>
-                                <th scope="col">TAPIC</th>
-                                <th scope="col">ENSAM</th>
-                                <th scope="col">DESPA</th>
-                                <th scope="col">NIEVES</th>
+                                <th class="tam" scope="col"></th>
+                                <th class="tam" scope="col">ID</th>
+                                <th class="tam" scope="col">Cliente</th>
+                                <th class="tam" scope="col">Fecha entrega</th>
+                                <th class="tam" scope="col">OC</th>
+                                <th class="tam" scope="col">Codigo</th>
+                                <th class="tam" scope="col">NOMBRE</th>
+                                <th class="tam" scope="col">CANT</th>
+                                <th class="tam" scope="col">COSTO UNIT</th>
+                                <th class="tam" scope="col">Cost total</th>
+                                <th class="tam" scope="col">C.TELA</th>
+                                <th class="tam" scope="col">COSTURA</th>
+                                <th class="tam" scope="col">C.MAD</th>
+                                <th class="tam" scope="col">ARM</th>
+                                <th class="tam" scope="col">EMPARR</th>
+                                <th class="tam" scope="col">C.ESP</th>
+                                <th class="tam" scope="col">P.BLAN</th>
+                                <th class="tam" scope="col">TAPIC</th>
+                                <th class="tam" scope="col">ENSAM</th>
+                                <th class="tam" scope="col">DESPA</th>
+                                <th class="tam" scope="col">NIEVES</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -309,7 +417,7 @@
                                         <button class="btn btn-link" type="button" data-toggle="collapse"
                                             data-target="#collapse{{ $f->id }}" aria-expanded="true"
                                             aria-controls="collapse{{ $f->id }}">
-                                            {{ $f->cliente }} - Sala Rinconera FIT Velvet Plomo
+                                            {{ $f->cliente }}
                                         </button>
                                     </h2>
                                 </div>
@@ -329,7 +437,7 @@
                                                 <option value="7033248">
                                             </datalist>
                                         </p>
-                                        <p><strong>Nombre:</strong> Sala Rinconera FIT Velvet Plomo</p>
+                                        <p id="nombre-collapse"><strong>Nombre:</strong> {{ $f->nombre }}</p>
                                         <p><strong>Cantidad:</strong> <input type="number" style="width: 60px;"></p>
                                         <p><strong>Costo Unitario:</strong> <input type="text" class="money-input"
                                                 oninput="handleInput(event)" placeholder="0"></p>
@@ -374,44 +482,74 @@
 
         <script type="text/javascript"></script>
     </body>
-    <nav class="navbar fixed-bottom navbar-light bg-light justify-content-center">
-        <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 1, 'año' => $año]) }}">Enero</a>
+    <nav class="navbar fixed-bottom ">
+
+        <ul class="nav nav-tabs justify-content-center">
+        <li>
+                <!-- Default dropup button -->
+<div class="btn-group dropup">
+  <button id="drop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    Dropup
+  </button>
+  <div class="dropdown-menu">
+    <!-- Dropdown menu links -->
+    <ul class="list-unstyled components mb-5">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('ver_año',['mes'=>1,'año'=>2024])}}">2024</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2025])}}">2025</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2026])}}">2026</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2027])}}">2027</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2028])}}">2028</a>
+                  </li>
+	        </ul>
+  </div>
+</div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 2, 'año' => $año]) }}">Febrero</a>
+                <a class="nav-link" id="tab1" href="{{ route('ver_año', ['mes' => 1, 'año' => $año]) }}">Enero</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 3, 'año' => $año]) }}">Marzo</a>
+                <a class="nav-link" id="tab2" href="{{ route('ver_año', ['mes' => 2, 'año' => $año]) }}">Febrero</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 4, 'año' => $año]) }}">Abril</a>
+                <a class="nav-link" id="tab3" href="{{ route('ver_año', ['mes' => 3, 'año' => $año]) }}">Marzo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 5, 'año' => $año]) }}">Mayo</a>
+                <a class="nav-link" id="tab4" href="{{ route('ver_año', ['mes' => 4, 'año' => $año]) }}">Abril</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 6, 'año' => $año]) }}">junio</a>
+                <a class="nav-link" id="tab5" href="{{ route('ver_año', ['mes' => 5, 'año' => $año]) }}">Mayo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 7, 'año' => $año]) }}">julio</a>
+                <a class="nav-link" id="tab6" href="{{ route('ver_año', ['mes' => 6, 'año' => $año]) }}">junio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 8, 'año' => $año]) }}">agosto</a>
+                <a class="nav-link" id="tab7" href="{{ route('ver_año', ['mes' => 7, 'año' => $año]) }}">julio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 9, 'año' => $año]) }}">septiembre</a>
+                <a class="nav-link" id="tab8" href="{{ route('ver_año', ['mes' => 8, 'año' => $año]) }}">agosto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 10, 'año' => $año]) }}">octube</a>
+                <a class="nav-link" id="tab9" href="{{ route('ver_año', ['mes' => 9, 'año' => $año]) }}">septiembre</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 11, 'año' => $año]) }}">noviembre</a>
+                <a class="nav-link" id="tab10" href="{{ route('ver_año', ['mes' => 10, 'año' => $año]) }}">octube</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('ver_año', ['mes' => 12, 'año' => $año]) }}">diciembre</a>
+                <a class="nav-link" id="tab11" href="{{ route('ver_año', ['mes' => 11, 'año' => $año]) }}">noviembre</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab12" href="{{ route('ver_año', ['mes' => 12, 'año' => $año]) }}">diciembre</a>
+            </li>
+
         </ul>
     </nav>
 
@@ -423,3 +561,4 @@
 
 
 </style>
+e

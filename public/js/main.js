@@ -145,3 +145,18 @@ function updateProgress(value, circleId) {
       collapseIcon.classList.add('fa-chevron-down');
     }
   });
+  document.addEventListener('DOMContentLoaded', function () {
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            localStorage.setItem('selectedTab', this.id);
+        });
+    });
+
+    // Recuperar el tab seleccionado al cargar la página
+    const selectedTab = localStorage.getItem('selectedTab');
+    if (selectedTab) {
+        document.getElementById(selectedTab).classList.add('active');
+    }
+});

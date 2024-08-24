@@ -95,12 +95,12 @@ class FechasExport implements FromView, WithStyles, WithTitle
         $fila = 3; // suponiendo que la primera fila es la de encabezados
         $i = 0;
         $columna=9;
-        //el error esta en que aparte de que no corres las columnas titne que pasar todas las columnas de una fila entonces te toca hacer una especie de for que recorra todas las columnas de una fila 
-        foreach ($Fechas as $f) {
-            $celda = $sheet->getCellByColumnAndRow($columna, $fila); // suponiendo que la columna 2 es la que deseas pintar
+        //el error esta en que aparte de que no corres las columnas titne que pasar todas las columnas de una fila entonces te toca hacer una especie de for que recorra todas las columnas de una fila
+        foreach ($Fechas as $f) {// suponiendo que la columna 2 es la que deseas pintar
+            $celda = $sheet->getCellByColumnAndRow($columna, $fila);
             foreach ($trabajos as $t) {
+                $celda = $sheet->getCellByColumnAndRow($columna, $fila);
                 $tt = $t;
-                dd($f->$tt, $tt, $t);
                 if ($f->$tt >= 70) {
                     $celda->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                     $celda->getStyle()->getFill()->getStartColor()->setARGB('00FF00'); // Verde
@@ -109,16 +109,21 @@ class FechasExport implements FromView, WithStyles, WithTitle
                     $celda->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                     $celda->getStyle()->getFill()->getStartColor()->setARGB('FFA07A'); // Naranjoso
                 }
-                if ($f->$tt < 25) {
+                if ($f->$tt < 25 and $f->$tt >0) {
                     $celda->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                     $celda->getStyle()->getFill()->getStartColor()->setARGB('FF0000'); // Rojo
 
                 }
+                if($f->$tt == null){
+                    $celda->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                    $celda->getStyle()->getFill()->getStartColor()->setARGB('C0C0C0');
+                }
+                $columna++;
             }
+            $columna=9;
 
             $fila++;
         }
-        // Agregar bordes a la tabla
 
     }
     public function title(): string

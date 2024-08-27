@@ -35,6 +35,7 @@
                     updateProgress(initialValue, circle.id);
                 });
             });
+
         </script>
 
         <!-- Formulario flotante -->
@@ -298,10 +299,9 @@
                             $i = 0;
                             ?>
                             <!-- FILAS -->
-
-
                             <form action="{{ route('actualizar_registros', ['mes' => $mes, 'año' => $año]) }}"
                                 method="GET">
+                                <button type="submit" class="btn btn-primary">Actualizar <span id="changed-rows"></span></button>
                                 @csrf
                                 @foreach ($Fechas as $f)
                                     <tr data-id="{{ $f->id }}" onclick="">
@@ -494,7 +494,12 @@
             #mydatatable tfoot input {
                 width: 100% !important;
             }
-
+            .changed {
+            background-color: #FFC67D; /* naranja pasteloso */
+            border-color: #FFC67D; /* mismo color para el borde */
+            border-width: 1px; /* ancho del borde */
+            border-style: solid; /* estilo del borde */
+            }
             #mydatatable tfoot {
                 display: table-header-group !important;
             }
@@ -582,10 +587,4 @@
 
     </html>
 @endsection
-<style>
 
-
-
-
-</style>
-e

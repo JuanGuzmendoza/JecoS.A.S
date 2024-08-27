@@ -160,3 +160,81 @@ function updateProgress(value, circleId) {
         document.getElementById(selectedTab).classList.add('active');
     }
 });
+
+
+
+
+
+//DETECTOR DE FILAS
+const table = document.getElementById('myTable');
+const rows = table.rows;
+let changedRows = 0;
+
+const changedRowsSpan = document.getElementById('changed-rows');
+
+document.querySelector('button[type="submit"]').addEventListener('click', (event) => {
+    detectChanges(); // Call detectChanges before submitting the form
+    if (changedRows > 0) {
+        event.preventDefault(); // Prevent the form from submitting
+        const confirmMessage = `Tiene ${changedRows} filas con cambios pendientes. ¿Seguro que desea actualizar?`;
+        if (confirm(confirmMessage)) {
+            // Si se confirma, se permite la actualización
+            event.target.form.submit();
+        }
+    }
+});
+
+// Function to detect changes in rows
+function detectChanges() {
+    changedRows = 0;
+    for (let i = 1; i < rows.length; i++) { // start from 1 because the first row is the header
+        const row = rows[i];
+        const inputs = row.querySelectorAll('input');
+        let changed = false;
+
+        inputs.forEach((input) => {
+            if (input.value !== input.defaultValue) {
+                changed = true;
+            }
+        });
+
+        if (changed) {
+            const button = row.querySelector('button');
+            button.classList.add('changed');
+            changedRows++;
+        } else {
+            const button = row.querySelector('button');
+            button.classList.remove('changed');
+        }
+    }
+
+    // Update the changed rows span
+    changedRowsSpan.textContent = `(${changedRows} filas cambiadas)`;
+}
+
+// Add event listener to each input to detect changes
+for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const inputs = row.querySelectorAll('input');
+    inputs.forEach((input) => {
+        input.addEventListener('input', detectChanges);
+    });
+}
+
+// Add event listener to navigation links
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+        detectChanges(); // Call detectChanges before navigating to new page
+        if (changedRows > 0) {
+            event.preventDefault();
+            const confirmMessage = `Tiene ${changedRows} filas con cambios pendientes. ¿Seguro que desea salir?`;
+            if (!confirm(confirmMessage)) {
+                return false;
+            } else {
+                // Si se confirma, se permite la navegación
+                link.href = link.getAttribute('href');
+            }
+        }
+    });
+});

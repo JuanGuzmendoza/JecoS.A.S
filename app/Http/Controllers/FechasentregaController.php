@@ -11,6 +11,7 @@ class FechasentregaController extends Controller
     {
         $F = Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
         $total = 0;
+
         foreach ($F as $Fechas) {
             $total += $Fechas->cost_total;
         }
@@ -20,7 +21,7 @@ class FechasentregaController extends Controller
     {
         $mes = 1;
         $F = Fechasentrega::where('mes', '=', $mes)->get();
-        return view('Fechas', ['Fechas' => $F, 'mes' => $mes]);
+        return view('Fechas', ['Fechas' => $F, 'mes' => $mes,'']);
     }
     public function store(Request $request, $mes, $año)
     {

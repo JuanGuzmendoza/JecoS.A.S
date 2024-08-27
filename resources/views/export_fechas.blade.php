@@ -1,26 +1,26 @@
 <h4>Excel {{$año}}/{{$mes}}</h4>
 <table>
     <thead>
-        <tr style="background-color: #0000FF; color: #FFFFFF;">
-            <th>CLIENTE</th>
-            <th>FECHA DE ENTREGA</th>
-            <th>OC</th>
-            <th>CODIGO</th>
-            <th>NOMBRE</th>
-            <th>CANT</th>
-            <th>COSTO UNIT</th>
-            <th>COSTO TOTAL</th>
-            <th>C.TELA</th>
-            <th>COSTURA</th>
-            <th>C.MAD</th>
-            <th>ARM</th>
-            <th>EMPARR</th>
-            <th>C.ESP</th>
-            <th>P.BLAN</th>
-            <th>TAPIC</th>
-            <th>ENSAM</th>
-            <th>DESPA</th>
-            <th>NIEVES</th>
+        <tr style="background-color: #070781bb; color: #FFFFFF;">
+            <th style="width: 100px; font-weight: bold; text-align: center;">CLIENTE</th>
+            <th style="width: 100px; font-weight: bold; text-align: center;">ENTREGA</th>
+            <th style="font-weight: bold; text-align: center;">OC</th>
+            <th style="font-weight: bold; text-align: center;">CODIGO</th>
+            <th style="width: 300px; font-weight: bold; text-align: center;">NOMBRE</th>
+            <th style="font-weight: bold; text-align: center;">CANT</th>
+            <th style="width: 80px; font-weight: bold; text-align: center;">COSTO UNIT</th>
+            <th style="width: 80px; font-weight: bold; text-align: center;">COSTO TOTAL</th>
+            <th style="font-weight: bold; text-align: center;">C.TELA</th>
+            <th style="font-weight: bold; text-align: center;">COSTURA</th>
+            <th style="font-weight: bold; text-align: center;">C.MAD</th>
+            <th style="font-weight: bold; text-align: center;">ARM</th>
+            <th style="font-weight: bold; text-align: center;">EMPARR</th>
+            <th style="font-weight: bold; text-align: center;">C.ESP</th>
+            <th style="font-weight: bold; text-align: center;">P.BLAN</th>
+            <th style="font-weight: bold; text-align: center;">TAPIC</th>
+            <th style="font-weight: bold; text-align: center;">ENSAM</th>
+            <th style="font-weight: bold; text-align: center;">DESPA</th>
+            <th style="font-weight: bold; text-align: center;">NIEVES</th>
         </tr>
     </thead>
     <tbody>

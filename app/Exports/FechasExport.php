@@ -121,7 +121,6 @@ class FechasExport implements FromView, WithStyles, WithTitle
                 $columna++;
             }
             $columna=9;
-
             $fila++;
         }
 

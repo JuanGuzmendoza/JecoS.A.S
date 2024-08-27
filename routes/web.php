@@ -21,7 +21,9 @@ Route::get('/', function () {
 Route::resource('/Fechas', FechasentregaController::class);
 Route::controller(FechasentregaController::class)->group(function(){
     Route::post('/Fechas/{mes}/{año}/guardar', 'store')->name('guardar_registro');
+    Route::get('/Fechas/{mes}/{año}/actualizar', 'update')->name('actualizar_registros');
     Route::get('/Fechas/{mes}/{año}', 'ver_año')->name('ver_año');
+
 });
 // Route::get('excel', [ExcelController::class,'form']);
 // Route::post('excel', [ExcelController::class,'import']);

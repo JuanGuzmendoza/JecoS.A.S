@@ -18,7 +18,7 @@
                 ?>
                 {{$mes}}
                 {{{$año}}}
-                <a href="{{route('ver_año',['mes'=>1,'año'=>$año=2024])}}" class="btn btn-secondary">Empezar</a>
+                <a href="{{route('ver_año',['mes'=>$mes,'año'=>$año])}}" class="btn btn-secondary">Empezar</a>
             </div>
         </div>
     </div>

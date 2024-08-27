@@ -7,57 +7,57 @@ use Illuminate\Http\Request;
 
 class FechasentregaController extends Controller
 {
-   public function ver_año($mes,$año){
-    $F = Fechasentrega::where([['mes', '=', $mes],['año', '=', $año]])->orderBy('entrega','ASC')->get();
-    $total=0;
-    foreach ($F as $Fechas) {
-        $total+=$Fechas->cost_total;
+    public function ver_año($mes, $año)
+    {
+        $F = Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
+        $total = 0;
+        foreach ($F as $Fechas) {
+            $total += $Fechas->cost_total;
+        }
+        return view('Fechas', ['Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total]);
     }
-    return view('Fechas', ['Fechas' => $F,'mes'=>$mes,'año'=>$año,'total'=>$total]);
-   }
     public function index()
     {
-        $mes=1;
+        $mes = 1;
         $F = Fechasentrega::where('mes', '=', $mes)->get();
-        return view('Fechas', ['Fechas' => $F,'mes'=>$mes]);
+        return view('Fechas', ['Fechas' => $F, 'mes' => $mes]);
     }
-    public function store(Request $request,$mes,$año)
+    public function store(Request $request, $mes, $año)
     {
-        $Fecha = Fechasentrega::create(['cliente' => $request->cliente,'mes' => $mes,'año'=>$año]);
+        $Fecha = Fechasentrega::create(['cliente' => $request->cliente, 'mes' => $mes, 'año' => $año]);
         $Fecha->save();
-        return redirect()->route('ver_año',['mes'=>$mes,'año'=>$año]);
+        return redirect()->route('ver_año', ['mes' => $mes, 'año' => $año]);
     }
     public function mes($mes)
     {
         $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
-        return view('Fechas',compact('mes','Fechas'));
+        return view('Fechas', compact('mes', 'Fechas'));
     }
-    public function update(Request $request,$id)
+    public function update(Request $request, $mes, $año)
     {
+        $FM = $request->Fechas;
+        foreach ($FM as $fm) {
 
-        $F= Fechasentrega::find($id);
-        $cost_total=$request->cant*$request->cost_unit;
-        $F->update([
-            // 'cliente' => $request->documento,
-            'entrega' => $request->entrega,
-            // 'oc' => $request->apellido,
-            // 'codigo' => $request->correo,
-            // 'nombre' => $request->telefono,
-            'cant' => $request->cant,
-            'cost_unit' => $request->cost_unit,
-            'cost_total' => $cost_total,
-            'c_tela' => $request->c_tela,
-            'cost' => $request->cost,
-            'c_mad' => $request->c_mad,
-            'arm' => $request->arm,
-            'emparr' => $request->emparr,
-            'c_esp' => $request->c_esp,
-            'p_blan' => $request->p_blan,
-            'tapic' => $request->tapic,
-            'ensam' => $request->ensam,
-            'despa' => $request->despa,
-            'nieves' => $request->nieves,
-        ]);
-        return redirect()->route('ver_año',['mes'=>$F->mes,'año'=>$F->año]);
+            $cost_total = $fm[7] * $fm[6];
+            $F = Fechasentrega::find($fm[0]);
+            $F->update([
+                'entrega' => $fm[1],
+                'cant' => $fm[6],
+                'cost_unit' => $fm[7],
+                'cost_total' => $cost_total,
+                'c_tela' =>  $fm[8],
+                'cost' =>  $fm[9],
+                'c_mad' => $fm[10],
+                'arm' =>  $fm[11],
+                'emparr' =>  $fm[12],
+                'c_esp' =>  $fm[13],
+                'p_blan' =>  $fm[14],
+                'tapic' =>  $fm[15],
+                'ensam' =>  $fm[16],
+                'despa' =>  $fm[17],
+                'nieves' =>  $fm[18],
+            ]);
+        }
+        return redirect()->route('ver_año', ['mes' => $mes, 'año' => $año]);
     }
 }

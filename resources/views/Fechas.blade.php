@@ -1,4 +1,3 @@
-
 @extends('layouts.menu')
 
 @section('content')
@@ -61,7 +60,7 @@
                                     placeholder="Ingrese cliente">
                             </div>
                             <div class="modal-footer">
-                            <button type="sumit" class="btn btn-primary">Guardar</button>
+                                <button type="sumit" class="btn btn-primary">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -69,121 +68,129 @@
                 </div>
             </div>
         </div>
-             <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
-        <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#exampleModal" title="Agregar nueva fila">
-            <i class="fa-solid fa-square-plus fa-2x"></i>
-        <p>Agregar fila</p>
-        </button>
-        <button type="button" class="btn btn-light btn-icon" title="Add Column" data-toggle="modal" data-target="#importModal">
-            <i class="fa-solid fa-file-import fa-2x"></i>
-            <p>Importar excel</p>
-        </button >
-        <button type="button" class="btn btn-light btn-icon" title="Add Column" data-toggle="modal" data-target="#exportarMesesModal">
-            <i class="fa-solid fa-file-export fa-2x"></i>
-            <p>Exportar excel</p>
-        </button >
+        <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
+            <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#exampleModal"
+                title="Agregar nueva fila">
+                <i class="fa-solid fa-square-plus fa-2x"></i>
+                <p>Agregar fila</p>
+            </button>
+            <button type="button" class="btn btn-light btn-icon" title="Add Column" data-toggle="modal"
+                data-target="#importModal">
+                <i class="fa-solid fa-file-import fa-2x"></i>
+                <p>Importar excel</p>
+            </button>
+            <button type="button" class="btn btn-light btn-icon" title="Add Column" data-toggle="modal"
+                data-target="#exportarMesesModal">
+                <i class="fa-solid fa-file-export fa-2x"></i>
+                <p>Exportar excel</p>
+            </button>
 
         </div>
 
 
- <div class="modal fade" id="exportarMesesModal" tabindex="-1" role="dialog" aria-labelledby="exportarMesesModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title label-negro text-dark" id="exportarMesesModalLabel">Exportar meses</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="{{route('exportar',['mes'=>$mes,'año'=>$año])}}" method="GET">
-            <div class="form-group">
-              <label class="label-negro text-dark">Selecciona los meses:</label>
-              <div class="form-check">
-                <input type="checkbox" id="enero" name="meses[]" value="enero">
-                <label for="enero" class="form-check-label label-negro text-dark">Enero</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="febrero" name="meses[]" value="febrero">
-                <label for="febrero" class="form-check-label label-negro text-dark">Febrero</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="marzo" name="meses[]" value="marzo">
-                <label for="marzo" class="form-check-label label-negro text-dark">Marzo</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="abril" name="meses[]" value="abril">
-                <label for="abril" class="form-check-label label-negro text-dark">Abril</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="mayo" name="meses[]" value="mayo">
-                <label for="mayo" class="form-check-label label-negro text-dark">Mayo</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="junio" name="meses[]" value="junio">
-                <label for="junio" class="form-check-label label-negro text-dark">Junio</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="julio" name="meses[]" value="julio">
-                <label for="julio" class="form-check-label label-negro text-dark">Julio</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="agosto" name="meses[]" value="agosto">
-                <label for="agosto" class="form-check-label label-negro text-dark">Agosto</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="septiembre" name="meses[]" value="septiembre">
-                <label for="septiembre" class="form-check-label label-negro text-dark">Septiembre</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="octubre" name="meses[]" value="octubre">
-                <label for="octubre" class="form-check-label label-negro text-dark">Octubre</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="noviembre" name="meses[]" value="noviembre">
-                <label for="noviembre" class="form-check-label label-negro text-dark">Noviembre</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="diciembre" name="meses[]" value="diciembre">
-                <label for="diciembre" class="form-check-label label-negro text-dark">Diciembre</label>
-              </div>
+        <div class="modal fade" id="exportarMesesModal" tabindex="-1" role="dialog"
+            aria-labelledby="exportarMesesModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title label-negro text-dark" id="exportarMesesModalLabel">Exportar meses</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('exportar', ['mes' => $mes, 'año' => $año]) }}" method="GET">
+                            <div class="form-group">
+                                <label class="label-negro text-dark">Selecciona los meses:</label>
+                                <div class="form-check">
+                                    <input type="checkbox" id="enero" name="meses[]" value="enero">
+                                    <label for="enero" class="form-check-label label-negro text-dark">Enero</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="febrero" name="meses[]" value="febrero">
+                                    <label for="febrero" class="form-check-label label-negro text-dark">Febrero</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="marzo" name="meses[]" value="marzo">
+                                    <label for="marzo" class="form-check-label label-negro text-dark">Marzo</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="abril" name="meses[]" value="abril">
+                                    <label for="abril" class="form-check-label label-negro text-dark">Abril</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="mayo" name="meses[]" value="mayo">
+                                    <label for="mayo" class="form-check-label label-negro text-dark">Mayo</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="junio" name="meses[]" value="junio">
+                                    <label for="junio" class="form-check-label label-negro text-dark">Junio</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="julio" name="meses[]" value="julio">
+                                    <label for="julio" class="form-check-label label-negro text-dark">Julio</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="agosto" name="meses[]" value="agosto">
+                                    <label for="agosto" class="form-check-label label-negro text-dark">Agosto</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="septiembre" name="meses[]" value="septiembre">
+                                    <label for="septiembre"
+                                        class="form-check-label label-negro text-dark">Septiembre</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="octubre" name="meses[]" value="octubre">
+                                    <label for="octubre" class="form-check-label label-negro text-dark">Octubre</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="noviembre" name="meses[]" value="noviembre">
+                                    <label for="noviembre"
+                                        class="form-check-label label-negro text-dark">Noviembre</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" id="diciembre" name="meses[]" value="diciembre">
+                                    <label for="diciembre"
+                                        class="form-check-label label-negro text-dark">Diciembre</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Exportar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit"  class="btn btn-primary">Exportar</button>
-            </div>
-          </form>
         </div>
-
-      </div>
-    </div>
-  </div>
         <!-- MODAL IMPORT  -->
-<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Importar excel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{route('importar')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <input type="file" name="file">
-                    <br>
+        <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Importar excel</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('importar') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="file">
+                            <br>
 
 
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="IMPORTAR">
+                    </div>
+                    </form>
+                </div>
             </div>
-            <div  class="modal-footer">
-            <input type="submit" class="btn btn-primary" value="IMPORTAR">
-            </div>
-            </form>
         </div>
-    </div>
-</div>
-    </div>
+        </div>
         <div id="mydatatable-container">
             <h3 class="mb-5">Programacion de Fechas @switch($mes)
                     @case(1)
@@ -236,7 +243,7 @@
 
                     @default
                 @endswitch
-        </h3>
+            </h3>
 
             <div class="g_botones">
                 <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample">
@@ -247,7 +254,8 @@
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body border-0">
                         <div class="group ">
-                            <input required="" type="text" class="input-per" id="myInput" onkeyup="myFunction()">
+                            <input required="" type="text" class="input-per" id="myInput"
+                                onkeyup="myFunction()">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label class="label-per">Nombre</label>
@@ -286,19 +294,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            $i = 0;
+                            ?>
                             <!-- FILAS -->
-                            @foreach ($Fechas as $f)
-                                <form action="{{ url('Fechas/' . $f->id) }}" method="post">
-                                    @method('PUT')
-                                    @csrf
 
-                                    <tr data-id="{{ $f->id }}" onclick="selectRow(this)">
+
+                            <form action="{{ route('actualizar_registros', ['mes' => $mes, 'año' => $año]) }}"
+                                method="GET">
+                                @csrf
+                                @foreach ($Fechas as $f)
+                                    <tr data-id="{{ $f->id }}" onclick="">
                                         <td><button type="sumit" class="btn btn-success"></button></td>
-                                        <td>{{ $f->id }}</td>
+                                        <td>
+                                            <input type="hidden" name="Fechas[{{ $i }}][0]" value="{{ $f->id }}">
+                                            {{$f->id}}
+                                        </td>
                                         <td>{{ $f->cliente }}</td>
 
-                                        <!-- FECHA ENTREGA -->
-                                        <td><input name="entrega" type="date" class="rounded border"value="{{$f->entrega}}"></td>
+                                        <td><input name="Fechas[{{ $i }}][1]" type="date"
+                                                class="rounded border"value="{{ $f->entrega }}"></td>
 
                                         <!-- OC -->
                                         <td>{{ $f->oc }}</td>
@@ -310,10 +325,11 @@
                                         <td style="font-size: 15px;">{{ $f->nombre }}</td>
 
                                         <!-- CANTIDAD -->
-                                        <td><input class="rounded border"type="number "name="cant" style="width: 60px ;"value="{{$f->cant}}"></td>
+                                        <td><input
+                                                class="rounded border"type="number " name="Fechas[{{ $i }}][6]"  style="width: 60px ;"value="{{ $f->cant }}"></td>
 
                                         <!-- COSTO UNITARIO -->
-                                        <td><input name="cost_unit" type="number" class="rounded border"
+                                        <td><input  name="Fechas[{{ $i }}][7]"  type="number" class="rounded border"
                                                 placeholder="0"value="{{ $f->cost_unit }}"></td>
 
                                         <!-- COSTO TOTAL -->
@@ -323,85 +339,89 @@
                                         <!-- BARRAS DE PROGRESO -->
                                         <td>
                                             <div class="progress-circle" id="1{{ $f->id }}">
-                                                <input name="c_tela" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][8]" type="number" min="0" max="100"
                                                     value="{{ $f->c_tela }}"
                                                     oninput="updateProgress(this.value, '1{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="2{{ $f->id }}">
-                                                <input name="cost"type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][9]"type="number" min="0" max="100"
                                                     value="{{ $f->cost }}"
                                                     oninput="updateProgress(this.value, '2{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="3{{ $f->id }}">
-                                                <input name="c_mad" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][10]" type="number" min="0" max="100"
                                                     value="{{ $f->c_mad }}"
                                                     oninput="updateProgress(this.value, '3{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="4{{ $f->id }}">
-                                                <input name="arm" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][11]" type="number" min="0" max="100"
                                                     value="{{ $f->arm }}"
                                                     oninput="updateProgress(this.value, '4{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="5{{ $f->id }}">
-                                                <input name="emparr" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][12]" type="number" min="0" max="100"
                                                     value="{{ $f->emparr }}"
                                                     oninput="updateProgress(this.value, '5{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="6{{ $f->id }}">
-                                                <input name="c_esp" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][13]" type="number" min="0" max="100"
                                                     value="{{ $f->c_esp }}"
                                                     oninput="updateProgress(this.value, '6{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="7{{ $f->id }}">
-                                                <input name="p_blan" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][14]" type="number" min="0" max="100"
                                                     value="{{ $f->p_blan }}"
                                                     oninput="updateProgress(this.value, '7{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="8{{ $f->id }}">
-                                                <input name="tapic" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][15]"type="number" min="0" max="100"
                                                     value="{{ $f->tapic }}"
                                                     oninput="updateProgress(this.value, '8{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="9{{ $f->id }}">
-                                                <input name="ensam" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][16]" type="number" min="0" max="100"
                                                     value="{{ $f->ensam }}"
                                                     oninput="updateProgress(this.value, '9{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="10{{ $f->id }}">
-                                                <input name="despa" type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][17]"type="number" min="0" max="100"
                                                     value="{{ $f->despa }}"
                                                     oninput="updateProgress(this.value, '10{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="-11{{ $f->id }}">
-                                                <input name="nieves"type="number" min="0" max="100"
+                                                <input name="Fechas[{{ $i }}][18]"type="number" min="0" max="100"
                                                     value="{{ $f->nieves }}"
                                                     oninput="updateProgress(this.value, '-11{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <!-- Agrega los demás campos con el mismo formato -->
                                     </tr>
-                                </form>
-                            @endforeach
+                                    <?php
+                                    $i += 1;
+                                    ?>
+                                @endforeach
+                            </form>
+
                         </tbody>
                     </table>
 
@@ -485,39 +505,42 @@
     <nav class="navbar fixed-bottom ">
 
         <ul class="nav nav-tabs justify-content-center">
-        <li>
+            <li>
                 <!-- Default dropup button -->
-<div class="btn-group dropup">
-  <button id="drop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    Años
-  </button>
-  <div class="dropdown-menu">
-    <!-- Dropdown menu links -->
-    <ul class="list-unstyled components mb-5">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{route('ver_año',['mes'=>1,'año'=>2024])}}">2024</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2025])}}">2025</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2026])}}">2026</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2027])}}">2027</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{route('ver_año',['mes'=>1,'año'=>2028])}}">2028</a>
-                  </li>
-	        </ul>
-  </div>
-</div>
+                <div class="btn-group dropup">
+                    <button id="drop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Años
+                    </button>
+                    <div class="dropdown-menu">
+                        <!-- Dropdown menu links -->
+                        <ul class="list-unstyled components mb-5">
+                            <li class="nav-item">
+                                <a class="nav-link active"
+                                    href="{{ route('ver_año', ['mes' => 1, 'año' => 2024]) }}">2024</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ver_año', ['mes' => 1, 'año' => 2025]) }}">2025</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ver_año', ['mes' => 1, 'año' => 2026]) }}">2026</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ver_año', ['mes' => 1, 'año' => 2027]) }}">2027</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ver_año', ['mes' => 1, 'año' => 2028]) }}">2028</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="tab1" href="{{ route('ver_año', ['mes' => 1, 'año' => $año]) }}">Enero</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tab2" href="{{ route('ver_año', ['mes' => 2, 'año' => $año]) }}">Febrero</a>
+                <a class="nav-link" id="tab2"
+                    href="{{ route('ver_año', ['mes' => 2, 'año' => $año]) }}">Febrero</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="tab3" href="{{ route('ver_año', ['mes' => 3, 'año' => $año]) }}">Marzo</a>
@@ -538,16 +561,20 @@
                 <a class="nav-link" id="tab8" href="{{ route('ver_año', ['mes' => 8, 'año' => $año]) }}">agosto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tab9" href="{{ route('ver_año', ['mes' => 9, 'año' => $año]) }}">septiembre</a>
+                <a class="nav-link" id="tab9"
+                    href="{{ route('ver_año', ['mes' => 9, 'año' => $año]) }}">septiembre</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tab10" href="{{ route('ver_año', ['mes' => 10, 'año' => $año]) }}">octube</a>
+                <a class="nav-link" id="tab10"
+                    href="{{ route('ver_año', ['mes' => 10, 'año' => $año]) }}">octube</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tab11" href="{{ route('ver_año', ['mes' => 11, 'año' => $año]) }}">noviembre</a>
+                <a class="nav-link" id="tab11"
+                    href="{{ route('ver_año', ['mes' => 11, 'año' => $año]) }}">noviembre</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tab12" href="{{ route('ver_año', ['mes' => 12, 'año' => $año]) }}">diciembre</a>
+                <a class="nav-link" id="tab12"
+                    href="{{ route('ver_año', ['mes' => 12, 'año' => $año]) }}">diciembre</a>
             </li>
 
         </ul>

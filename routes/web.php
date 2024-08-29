@@ -14,20 +14,23 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('/user', [UserController::class, 'index']);
-Route::get('/', function () {
-    return view('Bienvenida');
-});
-Route::resource('/Fechas', FechasentregaController::class);
-Route::controller(FechasentregaController::class)->group(function(){
-    Route::post('/Fechas/{mes}/{año}/guardar', 'store')->name('guardar_registro');
-    Route::get('/Fechas/{mes}/{año}/actualizar', 'update')->name('actualizar_registros');
-    Route::get('/Fechas/{mes}/{año}', 'ver_año')->name('ver_año');
+// Route::get('/', function () {
+//     return view('Bienvenida');
+// });
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('/Fechas', FechasentregaController::class);
+    Route::controller(FechasentregaController::class)->group(function(){
+        Route::post('/Fechas/{mes}/{año}/guardar', 'store')->name('guardar_registro');
+        Route::get('/Fechas/{mes}/{año}/actualizar', 'update')->name('actualizar_registros');
+        Route::get('/Fechas/{mes}/{año}', 'ver_año')->name('ver_año');
+    });
 
+    Route::controller(ExcelController::class)->group(function(){
+        Route::post('/Excel', 'import')->name('importar');
+        Route::get('/Excel/export/{mes}/{año}', 'export')->name('exportar');
+    });
 });
-// Route::get('excel', [ExcelController::class,'form']);
-// Route::post('excel', [ExcelController::class,'import']);
-Route::controller(ExcelController::class)->group(function(){
-    Route::post('/Excel', 'import')->name('importar');
-    Route::get('/Excel/export/{mes}/{año}', 'export')->name('exportar');
-});
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

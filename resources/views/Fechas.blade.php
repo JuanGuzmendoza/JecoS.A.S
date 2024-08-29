@@ -35,7 +35,6 @@
                     updateProgress(initialValue, circle.id);
                 });
             });
-
         </script>
 
         <!-- Formulario flotante -->
@@ -85,7 +84,20 @@
                 <i class="fa-solid fa-file-export fa-2x"></i>
                 <p>Exportar excel</p>
             </button>
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+            </a>
 
+
+            {{-- Boton de Logout --}}
+            <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </div>
 
 
@@ -94,7 +106,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title label-negro text-dark" id="exportarMesesModalLabel">Exportar meses de {{$año}}</h5>
+                        <h5 class="modal-title label-negro text-dark" id="exportarMesesModalLabel">Exportar meses de
+                            {{ $año }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -301,14 +314,16 @@
                             <!-- FILAS -->
                             <form action="{{ route('actualizar_registros', ['mes' => $mes, 'año' => $año]) }}"
                                 method="GET">
-                                <button type="submit" class="btn btn-primary">Actualizar <span id="changed-rows"></span></button>
+                                <button type="submit" class="btn btn-primary">Actualizar <span
+                                        id="changed-rows"></span></button>
                                 @csrf
                                 @foreach ($Fechas as $f)
                                     <tr data-id="{{ $f->id }}" onclick="">
                                         <td><button type="sumit" class="btn btn-success"></button></td>
                                         <td>
-                                            <input type="hidden" name="Fechas[{{ $i }}][0]" value="{{ $f->id }}">
-                                            {{$f->id}}
+                                            <input type="hidden" name="Fechas[{{ $i }}][0]"
+                                                value="{{ $f->id }}">
+                                            {{ $f->id }}
                                         </td>
                                         <td>{{ $f->cliente }}</td>
 
@@ -325,12 +340,13 @@
                                         <td style="font-size: 15px;">{{ $f->nombre }}</td>
 
                                         <!-- CANTIDAD -->
-                                        <td><input
-                                                class="rounded border"type="number " name="Fechas[{{ $i }}][6]"  style="width: 60px ;"value="{{ $f->cant }}"></td>
+                                        <td><input class="rounded border"type="number "
+                                                name="Fechas[{{ $i }}][6]"
+                                                style="width: 60px ;"value="{{ $f->cant }}"></td>
 
                                         <!-- COSTO UNITARIO -->
-                                        <td><input  name="Fechas[{{ $i }}][7]"  type="number" class="rounded border"
-                                                placeholder="0"value="{{ $f->cost_unit }}"></td>
+                                        <td><input name="Fechas[{{ $i }}][7]" type="number"
+                                                class="rounded border" placeholder="0"value="{{ $f->cost_unit }}"></td>
 
                                         <!-- COSTO TOTAL -->
                                         <td><a oninput="handleInput(event)" placeholder="0">${{ $f->cost_total }}</a>
@@ -339,78 +355,78 @@
                                         <!-- BARRAS DE PROGRESO -->
                                         <td>
                                             <div class="progress-circle" id="1{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][8]" type="number" min="0" max="100"
-                                                    value="{{ $f->c_tela }}"
+                                                <input name="Fechas[{{ $i }}][8]" type="number"
+                                                    min="0" max="100" value="{{ $f->c_tela }}"
                                                     oninput="updateProgress(this.value, '1{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="2{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][9]"type="number" min="0" max="100"
-                                                    value="{{ $f->cost }}"
+                                                <input name="Fechas[{{ $i }}][9]"type="number" min="0"
+                                                    max="100" value="{{ $f->cost }}"
                                                     oninput="updateProgress(this.value, '2{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="3{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][10]" type="number" min="0" max="100"
-                                                    value="{{ $f->c_mad }}"
+                                                <input name="Fechas[{{ $i }}][10]" type="number"
+                                                    min="0" max="100" value="{{ $f->c_mad }}"
                                                     oninput="updateProgress(this.value, '3{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="4{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][11]" type="number" min="0" max="100"
-                                                    value="{{ $f->arm }}"
+                                                <input name="Fechas[{{ $i }}][11]" type="number"
+                                                    min="0" max="100" value="{{ $f->arm }}"
                                                     oninput="updateProgress(this.value, '4{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="5{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][12]" type="number" min="0" max="100"
-                                                    value="{{ $f->emparr }}"
+                                                <input name="Fechas[{{ $i }}][12]" type="number"
+                                                    min="0" max="100" value="{{ $f->emparr }}"
                                                     oninput="updateProgress(this.value, '5{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="6{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][13]" type="number" min="0" max="100"
-                                                    value="{{ $f->c_esp }}"
+                                                <input name="Fechas[{{ $i }}][13]" type="number"
+                                                    min="0" max="100" value="{{ $f->c_esp }}"
                                                     oninput="updateProgress(this.value, '6{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="7{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][14]" type="number" min="0" max="100"
-                                                    value="{{ $f->p_blan }}"
+                                                <input name="Fechas[{{ $i }}][14]" type="number"
+                                                    min="0" max="100" value="{{ $f->p_blan }}"
                                                     oninput="updateProgress(this.value, '7{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="8{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][15]"type="number" min="0" max="100"
-                                                    value="{{ $f->tapic }}"
+                                                <input name="Fechas[{{ $i }}][15]"type="number" min="0"
+                                                    max="100" value="{{ $f->tapic }}"
                                                     oninput="updateProgress(this.value, '8{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="9{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][16]" type="number" min="0" max="100"
-                                                    value="{{ $f->ensam }}"
+                                                <input name="Fechas[{{ $i }}][16]" type="number"
+                                                    min="0" max="100" value="{{ $f->ensam }}"
                                                     oninput="updateProgress(this.value, '9{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="10{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][17]"type="number" min="0" max="100"
-                                                    value="{{ $f->despa }}"
+                                                <input name="Fechas[{{ $i }}][17]"type="number" min="0"
+                                                    max="100" value="{{ $f->despa }}"
                                                     oninput="updateProgress(this.value, '10{{ $f->id }}')">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="progress-circle" id="-11{{ $f->id }}">
-                                                <input name="Fechas[{{ $i }}][18]"type="number" min="0" max="100"
-                                                    value="{{ $f->nieves }}"
+                                                <input name="Fechas[{{ $i }}][18]"type="number" min="0"
+                                                    max="100" value="{{ $f->nieves }}"
                                                     oninput="updateProgress(this.value, '-11{{ $f->id }}')">
                                             </div>
                                         </td>
@@ -494,12 +510,18 @@
             #mydatatable tfoot input {
                 width: 100% !important;
             }
+
             .changed {
-            background-color: #FFC67D; /* naranja pasteloso */
-            border-color: #FFC67D; /* mismo color para el borde */
-            border-width: 1px; /* ancho del borde */
-            border-style: solid; /* estilo del borde */
+                background-color: #FFC67D;
+                /* naranja pasteloso */
+                border-color: #FFC67D;
+                /* mismo color para el borde */
+                border-width: 1px;
+                /* ancho del borde */
+                border-style: solid;
+                /* estilo del borde */
             }
+
             #mydatatable tfoot {
                 display: table-header-group !important;
             }
@@ -587,4 +609,3 @@
 
     </html>
 @endsection
-

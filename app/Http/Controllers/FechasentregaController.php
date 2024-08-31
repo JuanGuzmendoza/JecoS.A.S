@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fechasentrega;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class FechasentregaController extends Controller
 {
     public function ver_año($mes, $año)
@@ -60,5 +60,31 @@ class FechasentregaController extends Controller
             ]);
         }
         return redirect()->route('ver_año', ['mes' => $mes, 'año' => $año]);
+    }
+
+    //PASAR CODIGO A OTRO CONTROLADOR Y REFACTORIZAR EL WEB
+    public function update_area(Request $request, $mes, $año,$area)
+    {
+        $FM = $request->Fechas;
+        foreach ($FM as $fm) {
+            $F = Fechasentrega::find($fm[0]);
+            $F->update([
+                'entrega' => $fm[1],
+                'cant' => $fm[6],
+                $area =>  $fm[7],
+            ]);
+        }
+        return redirect()->route('ver_año_areas', ['mes' => $mes, 'año' => $año]);
+    }
+
+    public function ver_año_areas($mes, $año)
+    {
+        $F = Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
+        $total = 0;
+
+        foreach ($F as $Fechas) {
+            $total += $Fechas->cost_total;
+        }
+        return view('FechaTrabajos', ['Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total]);
     }
 }

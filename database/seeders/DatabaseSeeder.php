@@ -17,17 +17,18 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
         $users = [
+
             ['name' => 'Admin', 'email' => 'admin@gmail.com', 'Rol' => 'Admin'],
-            ['name' => 'Corte Tela', 'email' => 'corte_tela@gmail.com', 'Rol' => 'Corte_tela'],
-            ['name' => 'Costura', 'email' => 'costura@gmail.com', 'Rol' => 'Costura'],
-            ['name' => 'Corte Madera', 'email' => 'corte_madera@gmail.com', 'Rol' => 'Corte_madera'],
-            ['name' => 'Armado', 'email' => 'armado@gmail.com', 'Rol' => 'Armado'],
-            ['name' => 'Emparrillado', 'email' => 'emparrillado@gmail.com', 'Rol' => 'Emparrillado'],
-            ['name' => 'Corte Pluma', 'email' => 'corte_pluma@gmail.com', 'Rol' => 'Corte_espuma'],
-            ['name' => 'Blanqueo', 'email' => 'blanqueo@gmail.com', 'Rol' => 'Blanqueo'],
-            ['name' => 'Tapiceria', 'email' => 'tapiceria@gmail.com', 'Rol' => 'Tapiceria'],
-            ['name' => 'Ensamble', 'email' => 'ensamble@gmail.com', 'Rol' => 'Ensamble'],
-            ['name' => 'Despacho', 'email' => 'despacho@gmail.com', 'Rol' => 'Despacho'],
+            ['name' => 'Corte Tela', 'email' => 'corte_tela@gmail.com', 'Rol' => 'c_tela'],
+            ['name' => 'Costura', 'email' => 'costura@gmail.com', 'Rol' => 'cost'],//error
+            ['name' => 'Corte Madera', 'email' => 'corte_madera@gmail.com', 'Rol' => 'c_mad'],
+            ['name' => 'Armado', 'email' => 'armado@gmail.com', 'Rol' => 'arm'],
+            ['name' => 'Emparrillado', 'email' => 'emparrillado@gmail.com', 'Rol' => 'emparr'],
+            ['name' => 'Corte Pluma', 'email' => 'corte_pluma@gmail.com', 'Rol' => 'c_esp'],
+            ['name' => 'Blanqueo', 'email' => 'blanqueo@gmail.com', 'Rol' => 'p_blan'],
+            ['name' => 'Tapiceria', 'email' => 'tapiceria@gmail.com', 'Rol' => 'tapic'],
+            ['name' => 'Ensamble', 'email' => 'ensamble@gmail.com', 'Rol' => 'ensam'],
+            ['name' => 'Despacho', 'email' => 'despacho@gmail.com', 'Rol' => 'despa'],
 
         ];
 

@@ -22,7 +22,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(FechasentregaController::class)->group(function(){
         Route::post('/Fechas/{mes}/{año}/guardar', 'store')->name('guardar_registro');
         Route::get('/Fechas/{mes}/{año}/actualizar', 'update')->name('actualizar_registros');
-        Route::get('/Fechas/{mes}/{año}', 'ver_año')->name('ver_año');
+        Route::get('/Fechas/{mes}/{año}/{area}/actualizar_area', 'update_area')->name('actualizar_registros_area');
+        Route::get('/Fechas/Admin/{mes}/{año}', 'ver_año')->name('ver_año');
+        Route::get('/Fechas/Area/{mes}/{año}', 'ver_año_areas')->name('ver_año_areas');
     });
 
     Route::controller(ExcelController::class)->group(function(){

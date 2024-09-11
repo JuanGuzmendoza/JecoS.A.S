@@ -43,13 +43,13 @@
 
         </div>
         <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <a href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->roles->first()->name }}
             </a>
 
 
             {{-- Boton de Logout --}}
-            <a class="dropdown-item" href="{{ route('logout') }}"
+            <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('portafolio_productos', function (Blueprint $table) {
             $table->id();
+            $table->string('oc')->nullable();
+            $table->string('codigo')->unique()->nullable();
+            $table->string('nombre')->unique();
+            $table->integer('cost_unit')->nullable();
             $table->timestamps();
         });
     }

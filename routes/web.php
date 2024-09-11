@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\FechasentregaController;
+use App\Http\Controllers\PortafolioproductosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('Bienvenida');
 // });
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function (): void {
+    Route::resource('/Portafolio', PortafolioproductosController::class);
     Route::resource('/Fechas', FechasentregaController::class);
     Route::controller(FechasentregaController::class)->group(function(){
         Route::post('/Fechas/{mes}/{año}/guardar', 'store')->name('guardar_registro');

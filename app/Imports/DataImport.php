@@ -7,61 +7,103 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Carbon\Carbon;
 
-class DataImport implements ToCollection,WithHeadingRow
-{    public function collection(Collection $rows)
+class DataImport implements ToCollection, WithHeadingRow
+{
+    public function collection(Collection $rows)
     {
-        //agregar el filtro para que no agrege los que no tiene cantidad
+        //ARREGLAR ERROR DE DICIEMBRE Y FILTRO DE LOS CAMBIOS DE AÑO
         unset($rows[0]);
-        unset($rows[1]);
         $mes = date('m');
         $año = date('Y');
         $año2 = date('Y');
         $año3 = date('Y');
-        $mes2=$mes+1;
-        $mes3=$mes+2;
-      if ($mes == 11) {
-            $mes3=1;
+        $mes2 = $mes + 1;
+        $mes3 = $mes + 2;
+        if ($mes == 11) {
+            $mes3 = 1;
             $año3++;
-       }
-      if($mes >=12){
-            $mes2=1;
+        }
+        if ($mes >= 12) {
+            $mes2 = 1;
             $año2++;
-            $mes3=2;
+            $mes3 = 2;
             $año3++;
-       }
-//refactorizar el codigo usando un for para pasar por las 3 creaciones de los meses y no usar los 3 if
-             foreach($rows as $row) {
-                if ($row[3]>=1) {
-                    Fechasentrega::create( [
-                        'cliente'=>'JAMAR',
-                        'codigo'=>$row[1],
-                        'nombre'=>$row[2],
-                        'cant'=>$row[3],
-                        'mes'=>$mes,
-                        'año'=>$año
-                     ]);
+        }
+        $cant_meses = -1;
+        $meses_excel = [];
+        $indice = 0;
+        for ($i = 0; $i >= -10; $i++) {
+            $cant_meses++;
+            if (!isset($rows[1][$cant_meses])) {
+                break;
+            }
+            $meses = [
+                'ene' => 1,
+                'feb' => 2,
+                'mar' => 3,
+                'abr' => 4,
+                'may' => 5,
+                'jun' => 6,
+                'jul' => 7,
+                'ago' => 8,
+                'sep' => 9,
+                'oct' => 10,
+                'nov' => 11,
+                'dic' => 12
+            ];
+            $meses_full = [
+                'enero' => 1,
+                'febrero' => 2,
+                'marzo' => 3,
+                'abril' => 4,
+                'mayo' => 5,
+                'junio' => 6,
+                'julio' => 7,
+                'agosto' => 8,
+                'septiembre' => 9,
+                'octubre' => 10,
+                'noviembre' => 11,
+                'diciembre' => 12
+            ];
+
+            $texto = $rows[1][$cant_meses];
+            $pattern = '/\b(?:COMPRA\s+MES\s+DE\s+)?(?:Adicional\s+)?(' . implode('|', array_keys($meses)) . '|' . implode('|', array_keys($meses_full)) . ')\b/iu';
+            preg_match($pattern, $texto, $match);
+            if ($match) {
+                $mes = strtolower($match[1]);
+                if (isset($meses[$mes])) {
+                    $mesNumero = $meses[$mes];
+                } elseif (isset($meses_full[$mes])) {
+                    $mesNumero = $meses_full[$mes];
                 }
-                if ($row[4]>=1) {
-                    Fechasentrega::create( [
-                        'cliente'=>'JAMAR',
-                        'codigo'=>$row[1],
-                        'nombre'=>$row[2],
-                        'cant'=>$row[4],
-                        'mes'=>$mes2,
-                        'año'=>$año2
-                     ]);
+                $fecha = Carbon::createFromDate(null, $mesNumero, 1);
+                $meses_excel[$indice] = $fecha->month;
+                $indice++;
+            }
+        }
+
+        $indice = 0;
+        $cant_meses -= 2;
+        unset($rows[1]);
+        foreach ($rows as $row) {
+            $i = 3;
+            $indice = 0;
+            foreach ($meses_excel as $m) {
+                if ($row[$i] >= 1) {
+                    Fechasentrega::create([
+                        'cliente' => 'JAMAR',
+                        'codigo' => $row[1],
+                        'nombre' => $row[2],
+                        'cant' => $row[$i],
+                        'mes' =>  $m,
+                        'año' => $año
+                    ]);
                 }
-                if ($row[5]>=1) {
-                    Fechasentrega::create( [
-                        'cliente'=>'JAMAR',
-                        'codigo'=>$row[1],
-                        'nombre'=>$row[2],
-                        'cant'=>$row[5],
-                        'mes'=>$mes3,
-                        'año'=>$año3
-                     ]);
-                }
-           }
+                $indice++;
+                $i++;
+            }
+        }
     }
 }

@@ -68,80 +68,145 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="portafolio" tabindex="-1" role="dialog" aria-labelledby="portafolioLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header border-transparent">
-                  <h3 class="modal-title" id="portafolioLabel">Latest Orders</h3>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+        <style>
+        .modal-header {
+            background-color: #6c5ce7; /* purple color */
+            padding: 0.5rem; /* reduce padding to make the header thinner */
+            border-bottom: 1px solid #6c5ce7; /* thin purple border */
+        }
+        .modal-xl {
+    max-width: 90%; /* or any other value you want */
+}
+            #portafolio {
+    width: 50%; /* adjust the width to your liking */
+    height: 80vh; /* adjust the height to your liking */
+    margin: 10vh auto; /* add some margin to center the modal */
+}
+        </style>
+      <div class="modal fade" id="portafolio" tabindex="-1" role="dialog" aria-labelledby="portafolioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #6c5ce7; padding: 0.5rem; border-bottom: 1px solid #6c5ce7;">
+                    <!-- removed text from header -->
                 </div>
-                <div class="modal-body p-0">
-                  <div class="table-responsive">
-                    <table class="table m-0">
-                      <thead>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Item</th>
-                        <th>Status</th>
-                        <th>Popularity</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                        <td>Call of Duty IV</td>
-                        <td><span class="badge badge-success">Shipped</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                        <td>Samsung Smart TV</td>
-                        <td><span class="badge badge-warning">Pending</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                        <td>iPhone 6 Plus</td>
-                        <td><span class="badge badge-danger">Delivered</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                        <td>Samsung Smart TV</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        <td>
-                          <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.table-responsive -->
+                <div class="modal-body">
+                    <div class="page-content page-container" id="page-content">
+                        <div class="padding">
+                            <div class="row container d-flex justify-content-center">
+                                <div class="col-lg-8 grid-margin stretch-card">
+                                    <h4 class="card-title">PORTAFOLIO</h4>
+                                    <p class="card-description">
+                                        Productos
+                                    </p>
+                                            <!-- removed text from card title and description -->
+                                            <table class="table table-bordered table-striped" style="border-width: 1px; border-color: #ddd;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="border: none;">OC</th>
+                                                        <th style="border: none;">CODIGO</th>
+                                                        <th style="border: none;">NOMBRE</th>
+                                                        <th style="border: none;">PRECIO UNITARIO</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>   <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>   <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: none;">7033248</td>
+                                                        <td style="border: none;">90252212</td>
+                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
+                                                        <td style="border: none;">$ 1.600.000</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer clearfix">
-                  <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-                </div>
-              </div>
-              <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- /.modal -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+        <!-- /.modal -->
         <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
             <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#portafolio"
-            title="Agregar nueva fila">
-        <i class="fa-solid fa-briefcase fa-2x"></i>
-        <p>Portafolio</p>
-    </button>
+                title="Agregar nueva fila">
+                <i class="fa-solid fa-briefcase fa-2x"></i>
+                <p>Portafolio</p>
+            </button>
             <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#exampleModal"
                 title="Agregar nueva fila">
                 <i class="fa-solid fa-square-plus fa-2x"></i>
@@ -157,7 +222,8 @@
                 <i class="fa-solid fa-file-export fa-2x"></i>
                 <p>Exportar excel</p>
             </button>
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->name }}
             </a>
 

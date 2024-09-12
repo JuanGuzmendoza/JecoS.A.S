@@ -50,6 +50,10 @@
   article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block; }
 
+.bod-fechas{
+  padding-top: 70px;
+}
+
   body {
     padding-top: 70px;
     margin: 0;
@@ -1865,7 +1869,7 @@
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }
 
   .invalid-feedback {
-    display: none;
+    display: block;
     width: 100%;
     margin-top: 0.25rem;
     font-size: 80%;
@@ -8209,7 +8213,6 @@
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
     -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
 
@@ -8564,3 +8567,48 @@ margin-right: 20px;
 .nav-tabs .nav-link.active {
   color: #0000ff; /* Cambia el color del tab activo */
 }
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+}
+.sign-in {
+  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  color: #212121;
+  z-index: 1;
+  background: #e8e8e8;
+  position: relative;
+  width: 280px;
+  font-size: 17px;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms;
+  overflow: hidden;
+ }
+
+ .sign-in ::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #212121;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms
+ }
+ .sign-in :hover {
+  color: #e8e8e8;
+ }
+
+ .sign-in :hover::before {
+  width: 100%;
+ }
+

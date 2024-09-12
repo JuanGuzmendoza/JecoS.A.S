@@ -15,59 +15,44 @@ class DataImport implements ToCollection, WithHeadingRow
     {
         //ARREGLAR ERROR DE DICIEMBRE Y FILTRO DE LOS CAMBIOS DE AÑO
         unset($rows[0]);
-        $mes = date('m');
-        $año = date('Y');
-        $año2 = date('Y');
-        $año3 = date('Y');
-        $mes2 = $mes + 1;
-        $mes3 = $mes + 2;
-        if ($mes == 11) {
-            $mes3 = 1;
-            $año3++;
-        }
-        if ($mes >= 12) {
-            $mes2 = 1;
-            $año2++;
-            $mes3 = 2;
-            $año3++;
-        }
+        $mes_actual = date('m');
+        $año_actual= date('Y');
         $cant_meses = -1;
         $meses_excel = [];
         $indice = 0;
+        $meses = [
+            'ene' => 1,
+            'feb' => 2,
+            'mar' => 3,
+            'abr' => 4,
+            'may' => 5,
+            'jun' => 6,
+            'jul' => 7,
+            'ago' => 8,
+            'sep' => 9,
+            'oct' => 10,
+            'nov' => 11,
+            'dic' => 12
+        ];
+        $meses_full = [
+            'enero' => 1,
+            'febrero' => 2,
+            'marzo' => 3,
+            'abril' => 4,
+            'mayo' => 5,
+            'junio' => 6,
+            'julio' => 7,
+            'agosto' => 8,
+            'septiembre' => 9,
+            'octubre' => 10,
+            'noviembre' => 11,
+            'diciembre' => 12
+        ];
         for ($i = 0; $i >= -10; $i++) {
             $cant_meses++;
             if (!isset($rows[1][$cant_meses])) {
                 break;
             }
-            $meses = [
-                'ene' => 1,
-                'feb' => 2,
-                'mar' => 3,
-                'abr' => 4,
-                'may' => 5,
-                'jun' => 6,
-                'jul' => 7,
-                'ago' => 8,
-                'sep' => 9,
-                'oct' => 10,
-                'nov' => 11,
-                'dic' => 12
-            ];
-            $meses_full = [
-                'enero' => 1,
-                'febrero' => 2,
-                'marzo' => 3,
-                'abril' => 4,
-                'mayo' => 5,
-                'junio' => 6,
-                'julio' => 7,
-                'agosto' => 8,
-                'septiembre' => 9,
-                'octubre' => 10,
-                'noviembre' => 11,
-                'diciembre' => 12
-            ];
-
             $texto = $rows[1][$cant_meses];
             $pattern = '/\b(?:COMPRA\s+MES\s+DE\s+)?(?:Adicional\s+)?(' . implode('|', array_keys($meses)) . '|' . implode('|', array_keys($meses_full)) . ')\b/iu';
             preg_match($pattern, $texto, $match);
@@ -91,6 +76,9 @@ class DataImport implements ToCollection, WithHeadingRow
             $i = 3;
             $indice = 0;
             foreach ($meses_excel as $m) {
+                if ($m<$mes_actual){
+                    $año_actual++;
+                }
                 if ($row[$i] >= 1) {
                     Fechasentrega::create([
                         'cliente' => 'JAMAR',
@@ -98,9 +86,10 @@ class DataImport implements ToCollection, WithHeadingRow
                         'nombre' => $row[2],
                         'cant' => $row[$i],
                         'mes' =>  $m,
-                        'año' => $año
+                        'año' => $año_actual
                     ]);
                 }
+                $año_actual= date('Y');
                 $indice++;
                 $i++;
             }

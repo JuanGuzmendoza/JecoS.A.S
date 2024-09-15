@@ -69,136 +69,114 @@
             </div>
         </div>
         <style>
-        .modal-header {
-            background-color: #6c5ce7; /* purple color */
-            padding: 0.5rem; /* reduce padding to make the header thinner */
-            border-bottom: 1px solid #6c5ce7; /* thin purple border */
-        }
-        .modal-xl {
-    max-width: 90%; /* or any other value you want */
-}
-            #portafolio {
-    width: 50%; /* adjust the width to your liking */
-    height: 80vh; /* adjust the height to your liking */
-    margin: 10vh auto; /* add some margin to center the modal */
-}
-        </style>
-      <div class="modal fade" id="portafolio" tabindex="-1" role="dialog" aria-labelledby="portafolioLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #6c5ce7; padding: 0.5rem; border-bottom: 1px solid #6c5ce7;">
-                    <!-- removed text from header -->
-                </div>
-                <div class="modal-body">
-                    <div class="page-content page-container" id="page-content">
-                        <div class="padding">
-                            <div class="row container d-flex justify-content-center">
-                                <div class="col-lg-8 grid-margin stretch-card">
-                                    <h4 class="card-title">PORTAFOLIO</h4>
-                                    <p class="card-description">
-                                        Productos
-                                    </p>
-                                            <!-- removed text from card title and description -->
-                                            <table class="table table-bordered table-striped" style="border-width: 1px; border-color: #ddd;">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="border: none;">OC</th>
-                                                        <th style="border: none;">CODIGO</th>
-                                                        <th style="border: none;">NOMBRE</th>
-                                                        <th style="border: none;">PRECIO UNITARIO</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>   <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>   <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: none;">7033248</td>
-                                                        <td style="border: none;">90252212</td>
-                                                        <td style="border: none;">SALA RINCONERA FIT VELVET PLOMO EXP/SIRI HOME</td>
-                                                        <td style="border: none;">$ 1.600.000</td>
-                                                    </tr>
+            .modal-header {
+                background-color: #6c5ce7;
+                /* purple color */
+                padding: 0.5rem;
+                /* reduce padding to make the header thinner */
+                border-bottom: 1px solid #6c5ce7;
+                /* thin purple border */
+            }
 
-                                                </tbody>
-                                            </table>
+            .modal-xl {
+                max-width: 90%;
+                /* or any other value you want */
+            }
+
+            #portafolio {
+                width: 50%;
+                /* adjust the width to your liking */
+                height: 80vh;
+                /* adjust the height to your liking */
+                margin: 10vh auto;
+                /* add some margin to center the modal */
+            }
+        </style>
+
+        <div class="modal fade" id="portafolio" tabindex="-1" role="dialog" aria-labelledby="portafolioLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"
+                        style="background-color: #6c5ce7; padding: 0.5rem; border-bottom: 1px solid #6c5ce7;">
+                        <!-- removed text from header -->
+                    </div>
+                    <div class="modal-body">
+                        <div class="page-content page-container" id="page-content">
+                            <div class="padding">
+                                <div class="row container d-flex justify-content-center">
+                                    <div class="col-lg-8 grid-margin stretch-card">
+                                        <h4 class="card-title">PORTAFOLIO</h4>
+                                        <p class="card-description">
+                                            Productos
+                                        </p>
+
+                                        <div class="container-fluid">
+                                            <div class="table-responsive d-none d-md-table">
+                                                <table id="myTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <!-- COLUMNAS -->
+                                                            <th class="tam" scope="col">ID</th>
+                                                            <th class="tam" scope="col">CODIGO</th>
+                                                            <th class="tam" scope="col">NOMBRE</th>
+                                                            <th class="tam" scope="col">PRECIO UNITARIO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $portafolio_indice = 0;
+                                                        ?>
+                                                        <!-- FILAS -->
+                                                        <!--serparar logica del Js por lo de la venta de guardar-->
+                                                        <button type="submit" onclick="location.href='{{ route('Portafolio.create') }}'" class="btn btn-primary">Agregar Producto</button>
+                                                        <form action="{{ route('Portafolio.store') }}" method="GET">
+                                                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                                                            @csrf
+                                                            @foreach ($Portafolio as $p)
+                                                                <tr data-id="{{ $p->id }}">
+                                                                    <input type="hidden" name="Portafolio[{{ $portafolio_indice }}][0]"
+                                                                    value="{{ $p->id }}">
+                                                                    <td>{{$p->id}}</td>
+                                                                    <td><input name="Portafolio[{{ $portafolio_indice }}][1]"
+                                                                            type="text"
+                                                                            class="rounded border"
+                                                                            value="{{$p->codigo}}">
+                                                                    </td>
+                                                                    <td><input name="Portafolio[{{ $portafolio_indice}}][2]"
+                                                                            type="text"
+                                                                            class="rounded border"
+                                                                            value="{{$p->nombre}}">
+                                                                    </td>
+                                                                    <td><input name="Portafolio[{{$portafolio_indice}}][3]"
+                                                                            type="text"
+                                                                            class="rounded border"
+                                                                            value="{{$p->cost_unit}}">
+                                                                    </td>
+                                                                </tr>
+                                                                <?php
+                                                                $portafolio_indice += 1;
+                                                                ?>
+                                                            @endforeach
+                                                        </form>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal-dialog -->
-    </div>
 
         <!-- /.modal -->
         <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
@@ -222,8 +200,8 @@
                 <i class="fa-solid fa-file-export fa-2x"></i>
                 <p>Exportar excel</p>
             </button>
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" v-pre>
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->name }}
             </a>
 
@@ -724,7 +702,8 @@
                 <a class="nav-link" id="tab7" href="{{ route('ver_año', ['mes' => 7, 'año' => $año]) }}">julio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tab8" href="{{ route('ver_año', ['mes' => 8, 'año' => $año]) }}">agosto</a>
+                <a class="nav-link" id="tab8"
+                    href="{{ route('ver_año', ['mes' => 8, 'año' => $año]) }}">agosto</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="tab9"

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\portafolio_productos;
 use Illuminate\Http\Request;
-
 class PortafolioproductosController extends Controller
 {
     /**
@@ -22,17 +21,26 @@ class PortafolioproductosController extends Controller
      */
     public function create()
     {
-        //
+        $Producto = portafolio_productos::create();
+        $Producto->save();
+        session()->put('open_modal', true);
+        return redirect()->route('ver_año', ['mes' => date('m') ,'año' => date('Y')]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $P=$request->Portafolio;
+        foreach ($P as $p) {
+            $P = portafolio_productos::find($p[0]);
+            $P->update([
+                'codigo' => $p[1],
+                'nombre' => $p[2],
+                'cost_unit' => $p[3],
+            ]);
+        }
+        session()->put('open_modal', true);
+        return redirect()->route('ver_año', ['mes' => date('m') ,'año' => date('Y')]);
     }
-
     /**
      * Display the specified resource.
      */

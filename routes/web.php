@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::group(['middleware' => 'auth'], function (): void {
     Route::resource('/Portafolio', PortafolioproductosController::class);
+    Route::controller(PortafolioproductosController::class)->group(function(){
+        Route::get('/Portafolio', 'store')->name('Portafolio.store');
+    });
     Route::resource('/Fechas', FechasentregaController::class);
     Route::controller(FechasentregaController::class)->group(function(){
         Route::post('/Fechas/{mes}/{año}/guardar', 'store')->name('guardar_registro');

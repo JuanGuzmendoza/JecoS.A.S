@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Fechasentrega;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\portafolio_productos;
 class FechasentregaController extends Controller
 {
     public function ver_año($mes, $año)
     {
         $F = Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
         $total = 0;
-
+        $P=portafolio_productos::all();
         foreach ($F as $Fechas) {
             $total += $Fechas->cost_total;
         }
-        return view('Fechas', ['Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total]);
+        return view('Fechas', ['Portafolio'=>$P,'Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total])->with('open_modal', session()->get('open_modal'));
     }
     public function index()
     {
@@ -34,6 +35,7 @@ class FechasentregaController extends Controller
         $Fechas = Fechasentrega::where('mes', '=', $mes)->get();
         return view('Fechas', compact('mes', 'Fechas'));
     }
+
     public function update(Request $request, $mes, $año)
     {
         $FM = $request->Fechas;

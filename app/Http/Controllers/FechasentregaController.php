@@ -44,7 +44,10 @@ class FechasentregaController extends Controller
             $cost_total = $fm[7] * $fm[6];
             $F = Fechasentrega::find($fm[0]);
             $F->update([
-                'entrega' => $fm[1],
+                'entrega'=> $fm[1],
+                'oc'=> $fm[2],
+                'codigo'=> $fm[3],
+                'nombre'=> $fm[4],
                 'cant' => $fm[6],
                 'cost_unit' => $fm[7],
                 'cost_total' => $cost_total,

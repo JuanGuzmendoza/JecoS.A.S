@@ -6,8 +6,14 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Hello DefaultController!</title>
-
+        <title>Fechas</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.dropdown-toggle').dropdown();
+            });
+        </script>
         <!-- Required meta tags -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -129,29 +135,33 @@
                                                         ?>
                                                         <!-- FILAS -->
                                                         <!--serparar logica del Js por lo de la venta de guardar-->
-                                                        <button type="submit" onclick="location.href='{{ route('Portafolio.create') }}'" class="btn btn-primary">Agregar Producto</button>
+                                                        <button type="submit"
+                                                            onclick="location.href='{{ route('Portafolio.create') }}'"
+                                                            class="btn btn-primary">Agregar Producto</button>
                                                         <form action="{{ route('Portafolio.store') }}" method="GET">
-                                                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Actualizar</button>
                                                             @csrf
                                                             @foreach ($Portafolio as $p)
                                                                 <tr data-id="{{ $p->id }}">
-                                                                    <input type="hidden" name="Portafolio[{{ $portafolio_indice }}][0]"
-                                                                    value="{{ $p->id }}">
-                                                                    <td>{{$p->id}}</td>
-                                                                    <td><input name="Portafolio[{{ $portafolio_indice }}][1]"
-                                                                            type="text"
-                                                                            class="rounded border"
-                                                                            value="{{$p->codigo}}">
+                                                                    <input type="hidden"
+                                                                        name="Portafolio[{{ $portafolio_indice }}][0]"
+                                                                        value="{{ $p->id }}">
+                                                                    <td>{{ $p->id }}</td>
+                                                                    <td><input
+                                                                            name="Portafolio[{{ $portafolio_indice }}][1]"
+                                                                            type="text" class="rounded border"
+                                                                            value="{{ $p->codigo }}">
                                                                     </td>
-                                                                    <td><input name="Portafolio[{{ $portafolio_indice}}][2]"
-                                                                            type="text"
-                                                                            class="rounded border"
-                                                                            value="{{$p->nombre}}">
+                                                                    <td><input
+                                                                            name="Portafolio[{{ $portafolio_indice }}][2]"
+                                                                            type="text" class="rounded border"
+                                                                            value="{{ $p->nombre }}">
                                                                     </td>
-                                                                    <td><input name="Portafolio[{{$portafolio_indice}}][3]"
-                                                                            type="text"
-                                                                            class="rounded border"
-                                                                            value="{{$p->cost_unit}}">
+                                                                    <td><input
+                                                                            name="Portafolio[{{ $portafolio_indice }}][3]"
+                                                                            type="text" class="rounded border"
+                                                                            value="{{ $p->cost_unit }}">
                                                                     </td>
                                                                 </tr>
                                                                 <?php
@@ -405,6 +415,7 @@
                                 <th class="tam" scope="col">ID</th>
                                 <th class="tam" scope="col">Cliente</th>
                                 <th class="tam" scope="col">Fecha entrega</th>
+                                <th class="tam" scope="col"></th>
                                 <th class="tam" scope="col">OC</th>
                                 <th class="tam" scope="col">Codigo</th>
                                 <th class="tam" scope="col">NOMBRE</th>
@@ -446,15 +457,25 @@
 
                                         <td><input name="Fechas[{{ $i }}][1]" type="date"
                                                 class="rounded border"value="{{ $f->entrega }}"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                Productos
+                                                <span class="caret"></span>
+                                              </button>
 
+                                              <!-- Contenido del menú desplegable -->
+                                              <ul class="dropdown-menu">
+                                                @foreach ($Portafolio as $p)
+                                                <li><a href="javascript:void(0)" data-product-id="{{ $i }}" data-product-codigo="{{ $p->codigo }}" data-product-nombre="{{ $p->nombre }}" data-product-cost-unit="{{ $p->cost_unit }}">{{ $p->codigo }} {{ $p->nombre }} {{ $p->cost_unit }}</a></li>
+                                            @endforeach
+                                              </ul>
+                                        </td>
                                         <!-- OC -->
-                                        <td>{{ $f->oc }}</td>
-
+                                        <td><input type="text" name="Fechas[{{ $i }}][2]" value="{{ $f->oc }}"></td>
                                         <!-- CODIGO -->
-                                        <td>{{ $f->codigo }}</td>
-
+                                        <td><input type="text" name="Fechas[{{ $i }}][3]" value="{{ $f->codigo }}"></td>
                                         <!-- NOMBRE -->
-                                        <td style="font-size: 15px;">{{ $f->nombre }}</td>
+                                        <td><input type="text" name="Fechas[{{ $i }}][4]" value="{{ $f->nombre }}"></td>
 
                                         <!-- CANTIDAD -->
                                         <td><input class="rounded border"type="number "
@@ -552,12 +573,30 @@
                                     <?php
                                     $i += 1;
                                     ?>
+
                                 @endforeach
                             </form>
 
                         </tbody>
                     </table>
+                    <script>
 
+                       $(document).ready(function() {
+    $('.dropdown-menu li a').on('click', function() {
+        var productId = $(this).data('product-id');
+        var productoCodigo = $(this).data('product-codigo');
+        var productoNombre = $(this).data('product-nombre');
+        var productoCostUnit = $(this).data('product-cost-unit');
+
+        // Update the input fields with the selected product's information
+        $(this).closest('tr').find('input[name="Fechas[' + productId + '][7]"]').val(productoCostUnit);
+        $(this).closest('tr').find('input[name="Fechas[' + productId + '][3]"]').val(productoCodigo);
+        $(this).closest('tr').find('input[name="Fechas[' + productId + '][4]"]').val(productoNombre);
+
+        // Update other fields as needed
+    });
+});
+                                </script>
                 </div>
                 <div class="d-md-none">
                     <div class="accordion" id="accordionExample">

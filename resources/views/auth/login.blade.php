@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="UTF-8">
-        <title>Hello DefaultController!</title>
+        <title>Login JECO S.A.S</title>
 
         <!-- Required meta tags -->
         @laravelPWA

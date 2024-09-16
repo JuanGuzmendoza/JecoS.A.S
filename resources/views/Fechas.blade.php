@@ -100,12 +100,15 @@
         </style>
 
         <div class="modal fade" id="portafolio" tabindex="-1" role="dialog" aria-labelledby="portafolioLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
+            aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog modal-xl" role="document" data-backdrop="static">
                 <div class="modal-content">
                     <div class="modal-header"
                         style="background-color: #6c5ce7; padding: 0.5rem; border-bottom: 1px solid #6c5ce7;">
-                        <!-- removed text from header -->
+                        <h5 class="modal-title" id="portafolioLabel">PORTAFOLIO</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="page-content page-container" id="page-content">
@@ -119,7 +122,7 @@
 
                                         <div class="container-fluid">
                                             <div class="table-responsive d-none d-md-table">
-                                                <table id="myTable">
+                                                <table id="Portafolio">
                                                     <thead>
                                                         <tr>
                                                             <!-- COLUMNAS -->
@@ -188,6 +191,12 @@
             <!-- /.modal-dialog -->
         </div>
 
+        <script>
+            $('#portafolio').on('hidden.bs.modal', function() {
+                console.log('Modal closed');
+                // Add any additional code here to perform actions when the modal is closed
+            });
+        </script>
         <!-- /.modal -->
         <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
             <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#portafolio"
@@ -458,24 +467,33 @@
                                         <td><input name="Fechas[{{ $i }}][1]" type="date"
                                                 class="rounded border"value="{{ $f->entrega }}"></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown">
                                                 Productos
                                                 <span class="caret"></span>
-                                              </button>
+                                            </button>
 
-                                              <!-- Contenido del menú desplegable -->
-                                              <ul class="dropdown-menu">
+                                            <!-- Contenido del menú desplegable -->
+                                            <ul class="dropdown-menu">
                                                 @foreach ($Portafolio as $p)
-                                                <li><a href="javascript:void(0)" data-product-id="{{ $i }}" data-product-codigo="{{ $p->codigo }}" data-product-nombre="{{ $p->nombre }}" data-product-cost-unit="{{ $p->cost_unit }}">{{ $p->codigo }} {{ $p->nombre }} {{ $p->cost_unit }}</a></li>
-                                            @endforeach
-                                              </ul>
+                                                    <li><a href="javascript:void(0)"
+                                                            data-product-id="{{ $i }}"
+                                                            data-product-codigo="{{ $p->codigo }}"
+                                                            data-product-nombre="{{ $p->nombre }}"
+                                                            data-product-cost-unit="{{ $p->cost_unit }}">{{ $p->codigo }}
+                                                            {{ $p->nombre }} {{ $p->cost_unit }}</a></li>
+                                                @endforeach
+                                            </ul>
                                         </td>
                                         <!-- OC -->
-                                        <td><input type="text" name="Fechas[{{ $i }}][2]" value="{{ $f->oc }}"></td>
+                                        <td><input type="text" name="Fechas[{{ $i }}][2]"
+                                                value="{{ $f->oc }}"></td>
                                         <!-- CODIGO -->
-                                        <td><input type="text" name="Fechas[{{ $i }}][3]" value="{{ $f->codigo }}"></td>
+                                        <td><input type="text" name="Fechas[{{ $i }}][3]"
+                                                value="{{ $f->codigo }}"></td>
                                         <!-- NOMBRE -->
-                                        <td><input type="text" name="Fechas[{{ $i }}][4]" value="{{ $f->nombre }}"></td>
+                                        <td><input type="text" name="Fechas[{{ $i }}][4]"
+                                                value="{{ $f->nombre }}"></td>
 
                                         <!-- CANTIDAD -->
                                         <td><input class="rounded border"type="number "
@@ -573,30 +591,12 @@
                                     <?php
                                     $i += 1;
                                     ?>
-
                                 @endforeach
                             </form>
 
                         </tbody>
                     </table>
-                    <script>
 
-                       $(document).ready(function() {
-    $('.dropdown-menu li a').on('click', function() {
-        var productId = $(this).data('product-id');
-        var productoCodigo = $(this).data('product-codigo');
-        var productoNombre = $(this).data('product-nombre');
-        var productoCostUnit = $(this).data('product-cost-unit');
-
-        // Update the input fields with the selected product's information
-        $(this).closest('tr').find('input[name="Fechas[' + productId + '][7]"]').val(productoCostUnit);
-        $(this).closest('tr').find('input[name="Fechas[' + productId + '][3]"]').val(productoCodigo);
-        $(this).closest('tr').find('input[name="Fechas[' + productId + '][4]"]').val(productoNombre);
-
-        // Update other fields as needed
-    });
-});
-                                </script>
                 </div>
                 <div class="d-md-none">
                     <div class="accordion" id="accordionExample">

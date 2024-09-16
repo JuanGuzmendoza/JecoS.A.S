@@ -40,8 +40,8 @@ class FechasentregaController extends Controller
     {
         $FM = $request->Fechas;
         foreach ($FM as $fm) {
-
-            $cost_total = $fm[7] * $fm[6];
+            $c_u = (float) str_replace(array('.', ','), '', $fm[7]);
+            $cost_total =  $c_u * $fm[6];
             $F = Fechasentrega::find($fm[0]);
             $F->update([
                 'entrega'=> $fm[1],
@@ -49,7 +49,7 @@ class FechasentregaController extends Controller
                 'codigo'=> $fm[3],
                 'nombre'=> $fm[4],
                 'cant' => $fm[6],
-                'cost_unit' => $fm[7],
+                'cost_unit' => $c_u,
                 'cost_total' => $cost_total,
                 'c_tela' =>  $fm[8],
                 'cost' =>  $fm[9],

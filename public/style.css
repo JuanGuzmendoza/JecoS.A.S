@@ -4,7 +4,23 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+    /* Add a slightly circular border to the dropdown menu */
+    .dropdown-menu {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
 
+    /* Change the color of the anchor tags to black */
+    .dropdown-menu a {
+        color: #000;
+        text-decoration: none;
+    }  /* Add a slightly circular border to the dropdown menu */
+
+    /* Add a hover effect to each anchor tag */
+    .dropdown-menu a:hover {
+        background-color: #f0f0f0; /* light gray background on hover */
+        color: #333; /* slightly darker text color on hover */
+    }
  :root {
     --blue: #007bff;
     --indigo: #6610f2;

@@ -247,8 +247,11 @@ $(document).ready(function () {
         var productoNombre = $(this).data('product-nombre');
         var productoCostUnit = $(this).data('product-cost-unit');
 
+        // Formatear el valor de productoCostUnit
+        var formattedCostUnit = productoCostUnit.toLocaleString('es-ES', { minimumFractionDigits: 0});
+
         // Update the input fields with the selected product's information
-        $(this).closest('tr').find('input[name="Fechas[' + productId + '][7]"]').val(productoCostUnit);
+        $(this).closest('tr').find('input[name="Fechas[' + productId + '][7]"]').val(formattedCostUnit);
         $(this).closest('tr').find('input[name="Fechas[' + productId + '][3]"]').val(productoCodigo);
         $(this).closest('tr').find('input[name="Fechas[' + productId + '][4]"]').val(productoNombre);
     });

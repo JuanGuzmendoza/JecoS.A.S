@@ -7,8 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Fechas</title>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script>
             $(document).ready(function() {
                 $('.dropdown-toggle').dropdown();
@@ -467,23 +466,33 @@
                                         <td><input name="Fechas[{{ $i }}][1]" type="date"
                                                 class="rounded border"value="{{ $f->entrega }}"></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown">
-                                                Productos
-                                                <span class="caret"></span>
-                                            </button>
-
+                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                            data-toggle="dropdown">
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMZJREFUSEvllUEKwkAMRd8/hQtBEBd6Gy/jxhvohTyIG3ei4MJbRFqoWNuZBOugaLfzk5f8ZDqi8KfC+ckCzGwJbIBFopADsJK0SxXqAa7AyOnyKGn2KsCqQEm9hZhZ9ryOzVXnJfDOW4CA39F9aM3l3oGZXYBxNEt0Lo8A188I/Nm2HwREbIhomtXuWBQJjmiSAO9SNck93fcBIrZUmj9Y09Tw3mHRGZhEEzm6k6Rp3990C8wHQvbAunnlPvsmD+ykDi/ewQ3bvokZuRyp8QAAAABJRU5ErkJggg=="
+                                                 width="16" height="16" />
+                                            <span class="caret"></span>
+                                    </button>
                                             <!-- Contenido del menú desplegable -->
-                                            <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu dropdown-menu-lg">
                                                 @foreach ($Portafolio as $p)
-                                                    <li><a href="javascript:void(0)"
-                                                            data-product-id="{{ $i }}"
-                                                            data-product-codigo="{{ $p->codigo }}"
-                                                            data-product-nombre="{{ $p->nombre }}"
-                                                            data-product-cost-unit="{{ $p->cost_unit }}">{{ $p->codigo }}
-                                                            {{ $p->nombre }} {{ $p->cost_unit }}</a></li>
+                                                    <li>
+                                                        <a href="javascript:void(0)"
+                                                           data-product-id="{{ $i }}"
+                                                           data-product-codigo="{{ $p->codigo }}"
+                                                           data-product-nombre="{{ $p->nombre }}"
+                                                           data-product-cost-unit="{{ $p->cost_unit }}">
+                                                            <span style="font-weight: bold;">Nombre:</span> {{ $p->nombre }}<br>
+                                                            <span style="font-weight: bold;">Código:</span> {{ $p->codigo }}<br>
+                                                            <span style="font-weight: bold;">Costo Unitario:</span> ${{ number_format($p->cost_unit, 0, '.', '.') }} <!-- added currency format -->
+                                                        </a>
+                                                        <hr style="margin: 5px 0;">
+                                                    </li>
                                                 @endforeach
                                             </ul>
+
+                                            <style>
+
+                                            </style>
                                         </td>
                                         <!-- OC -->
                                         <td><input type="text" name="Fechas[{{ $i }}][2]"
@@ -501,12 +510,12 @@
                                                 style="width: 60px ;"value="{{ $f->cant }}"></td>
 
                                         <!-- COSTO UNITARIO -->
-                                        <td><input name="Fechas[{{ $i }}][7]" type="number"
-                                                class="rounded border" placeholder="0"value="{{ $f->cost_unit }}"></td>
+                                        <td><input name="Fechas[{{ $i }}][7]" type="text"
+                                            class="rounded border" placeholder="0" value="{{ number_format($f->cost_unit, 0, ',', '.') }}"
+                                            pattern="[0-9.,]+"></td>
 
                                         <!-- COSTO TOTAL -->
-                                        <td><a oninput="handleInput(event)" placeholder="0">${{ $f->cost_total }}</a>
-                                        </td>
+                                        <td><a oninput="handleInput(event)" placeholder="0">{{ number_format($f->cost_total, 0, ',', '.') }}</a></td>
 
                                         <!-- BARRAS DE PROGRESO -->
                                         <td>

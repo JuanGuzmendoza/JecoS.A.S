@@ -14,14 +14,12 @@ class ExcelController extends Controller
 
     public function form()
     {
-
         return view('formulario');
     }
     public function import(Request $request)
     {
-        // dd('imp');
         $file = $request->file('file');
-        Excel::import(new DataImport, $file);
+        Excel::import(new DataImport, $file);//pasa el archivo para el controlador de Dataimport
         $mes = date('m');
         $año = date('Y');
         return redirect()->route('ver_año', ['mes' => $mes, 'año' => $año]);
@@ -33,3 +31,4 @@ class ExcelController extends Controller
         return Excel::download(new MesesExport($r->meses,$año),$fileName);
     }
 }
+

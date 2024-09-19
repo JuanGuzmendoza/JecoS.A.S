@@ -14,35 +14,45 @@ class FechasExport implements FromView, WithStyles, WithTitle
 {
     private $mes;
     private $año;
-    private $indice_mes;
-    public function __construct($mes, $año, $indice_mes)
+    private $indice= [
+        "enero" => 1,
+        "febrero" => 2,
+        "marzo" => 3,
+        "abril" => 4,
+        "mayo" => 5,
+        "junio" => 6,
+        "julio" => 7,
+        "agosto" => 8,
+        "septiembre" => 9,
+        "octubre" => 10,
+        "noviembre" => 11,
+        "diciembre" => 12,
+    ];
+    private $trabajos = [
+        0 => "c_tela",
+        1 => "cost",
+        2 => "c_mad",
+        3 => "arm",
+        4 => "emparr",
+        5 => "c_esp",
+        6 => "p_blan",
+        7 => "tapic",
+        8 => "ensam",
+        9 => "despa",
+        10 => "nieves",
+    ];
+
+    public function __construct($mes, $año)
     {
-        $this->indice_mes = $indice_mes;
         $this->mes = $mes;
         $this->año = $año;
     }
 
     public function view(): View
     {
-        $indice = [
-            "enero" => 1,
-            "febrero" => 2,
-            "marzo" => 3,
-            "abril" => 4,
-            "mayo" => 5,
-            "junio" => 6,
-            "julio" => 7,
-            "agosto" => 8,
-            "septiembre" => 9,
-            "octubre" => 10,
-            "noviembre" => 11,
-            "diciembre" => 12,
-        ];
-
-
         //cambiar la parte de mandar meses y año para solo usar la propia coleccion del modelo de fechas
         return view('export_fechas', [
-            'Fechas' => Fechasentrega::where([['mes', '=', $indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get(),
+            'Fechas' => Fechasentrega::where([['mes', '=', $this->indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get(),
             'mes' => $this->mes,
             'año' => $this->año
         ]);
@@ -50,34 +60,6 @@ class FechasExport implements FromView, WithStyles, WithTitle
 
     public function styles(Worksheet $sheet)
     {
-        $trabajos = [
-            0 => "c_tela",
-            1 => "cost",
-            2 => "c_mad",
-            3 => "arm",
-            4 => "emparr",
-            5 => "c_esp",
-            6 => "p_blan",
-            7 => "tapic",
-            8 => "ensam",
-            9 => "despa",
-            10 => "nieves",
-        ];
-        $indice = [
-            "enero" => 1,
-            "febrero" => 2,
-            "marzo" => 3,
-            "abril" => 4,
-            "mayo" => 5,
-            "junio" => 6,
-            "julio" => 7,
-            "agosto" => 8,
-            "septiembre" => 9,
-            "octubre" => 10,
-            "noviembre" => 11,
-            "diciembre" => 12,
-        ];
-
         $sheet->getStyle('A1:S' . $sheet->getHighestRow())->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
         // Agregar sombreado a la tabla
@@ -91,14 +73,13 @@ class FechasExport implements FromView, WithStyles, WithTitle
         $sheet->getStyle('A1:S1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
         $sheet->getStyle('A1:S1')->getFill()->getStartColor()->setARGB('0000FF'); // Azul
         $sheet->getStyle('A1:S1')->getFont()->getColor()->setARGB('FFFFFF'); // Blanco
-        $Fechas = Fechasentrega::where([['mes', '=', $indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get();
+        $Fechas = Fechasentrega::where([['mes', '=', $this->indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get();
         $fila = 3; // suponiendo que la primera fila es la de encabezados
         $i = 0;
         $columna=9;
-        //el error esta en que aparte de que no corres las columnas titne que pasar todas las columnas de una fila entonces te toca hacer una especie de for que recorra todas las columnas de una fila
         foreach ($Fechas as $f) {// suponiendo que la columna 2 es la que deseas pintar
             $celda = $sheet->getCellByColumnAndRow($columna, $fila);
-            foreach ($trabajos as $t) {
+            foreach ($this->trabajos as $t) {
                 $celda = $sheet->getCellByColumnAndRow($columna, $fila);
                 $tt = $t;
                 if ($f->$tt >= 70) {
@@ -130,3 +111,6 @@ class FechasExport implements FromView, WithStyles, WithTitle
         return $this->mes;
     }
 }
+
+
+

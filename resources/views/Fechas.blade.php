@@ -515,7 +515,7 @@
                                             pattern="[0-9.,]+"></td>
 
                                         <!-- COSTO TOTAL -->
-                                        <td><a oninput="handleInput(event)" placeholder="0">{{ number_format($f->cost_total, 0, ',', '.') }}</a></td>
+                                        <td><a oninput="handleInput(event)" placeholder="0">${{ number_format($f->cost_total, 0, ',', '.') }}</a></td>
 
                                         <!-- BARRAS DE PROGRESO -->
                                         <td>

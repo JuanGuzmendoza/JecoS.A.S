@@ -8,26 +8,31 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\portafolio_productos;
 class FechasentregaController extends Controller
 {
+
+
+    public function Modelo_fecha($mes,$año){
+        $Fecha_modelo = Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
+       return $Fecha_modelo;
+    }
+
     public function ver_año($mes, $año)
     {
-        $F = Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
+        $F =$this->Modelo_fecha($mes, $año);
         $total = 0;
         $P=portafolio_productos::all();
         foreach ($F as $Fechas) {
             $total += $Fechas->cost_total;
         }
-        return view('Fechas', ['Portafolio'=>$P,'Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total])->with('open_modal', session()->get('open_modal'));
+
+        return view('Fechas', ['Portafolio'=>$P,'Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total]);
     }
     public function index()
     {
-        $mes = 1;
-        $F = Fechasentrega::where('mes', '=', $mes)->get();
-        return view('Fechas', ['Fechas' => $F, 'mes' => $mes,'']);
     }
     public function store(Request $request, $mes, $año)
     {
-        $Fecha = Fechasentrega::create(['cliente' => $request->cliente, 'mes' => $mes, 'año' => $año]);
-        $Fecha->save();
+        $Fecha_registro= Fechasentrega::create(['cliente' => $request->cliente, 'mes' => $mes, 'año' => $año]);
+        $Fecha_registro->save();
         return redirect()->route('ver_año', ['mes' => $mes, 'año' => $año]);
     }
     public function mes($mes)
@@ -38,8 +43,8 @@ class FechasentregaController extends Controller
 
     public function update(Request $request, $mes, $año)
     {
-        $FM = $request->Fechas;
-        foreach ($FM as $fm) {
+        $Fechas_matric_admin = $request->Fechas;
+        foreach ($Fechas_matric_admin as $fm) {
             $c_u = (float) str_replace(array('.', ','), '', $fm[7]);
             $cost_total =  $c_u * $fm[6];
             $F = Fechasentrega::find($fm[0]);
@@ -70,8 +75,10 @@ class FechasentregaController extends Controller
     //PASAR CODIGO A OTRO CONTROLADOR Y REFACTORIZAR EL WEB
     public function update_area(Request $request, $mes, $año,$area)
     {
-        $FM = $request->Fechas;
-        foreach ($FM as $fm) {
+        //Refactorizacion del codigo con funcion de js guardando en la matric solo las filas cambiadas
+
+        $Fechas_matric_area = $request->Fechas;
+        foreach ($Fechas_matric_area as $fm) {
             $F = Fechasentrega::find($fm[0]);
             $F->update([
                 'entrega' => $fm[1],
@@ -84,12 +91,12 @@ class FechasentregaController extends Controller
 
     public function ver_año_areas($mes, $año)
     {
-        $F = Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
+        $Fechas_entrega_asc=$this->Modelo_fecha($mes,$año)->orderBy('entrega', 'ASC')->get();
         $total = 0;
 
-        foreach ($F as $Fechas) {
+        foreach ($Fechas_entrega_asc as $Fechas) {
             $total += $Fechas->cost_total;
         }
-        return view('FechaTrabajos', ['Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total]);
+        return view('FechaTrabajos', ['Fechas' => $Fechas_entrega_asc, 'mes' => $mes, 'año' => $año, 'total' => $total]);
     }
 }

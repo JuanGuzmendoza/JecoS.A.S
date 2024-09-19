@@ -22,10 +22,8 @@ class MesesExport implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        $indice_mes = 0;
         foreach ($this->meses as $mes) {
-            $indice_mes++;
-            $sheets[] = new FechasExport($mes, $this->año, $indice_mes);
+            $sheets[] = new FechasExport($mes, $this->año);
         }
         return $sheets;
     }

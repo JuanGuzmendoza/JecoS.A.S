@@ -24,6 +24,9 @@
         <!-- Datatables -->
         <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.css">
         <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
     </head>
 
     <body>
@@ -446,6 +449,7 @@
                         <tbody>
                             <?php
                             $i = 0;
+
                             ?>
                             <!-- FILAS -->
                             <form action="{{ route('actualizar_registros', ['mes' => $mes, 'año' => $año]) }}"
@@ -466,33 +470,70 @@
                                         <td><input name="Fechas[{{ $i }}][1]" type="date"
                                                 class="rounded border"value="{{ $f->entrega }}"></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
-                                            data-toggle="dropdown">
-                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMZJREFUSEvllUEKwkAMRd8/hQtBEBd6Gy/jxhvohTyIG3ei4MJbRFqoWNuZBOugaLfzk5f8ZDqi8KfC+ckCzGwJbIBFopADsJK0SxXqAa7AyOnyKGn2KsCqQEm9hZhZ9ryOzVXnJfDOW4CA39F9aM3l3oGZXYBxNEt0Lo8A188I/Nm2HwREbIhomtXuWBQJjmiSAO9SNck93fcBIrZUmj9Y09Tw3mHRGZhEEzm6k6Rp3990C8wHQvbAunnlPvsmD+ykDi/ewQ3bvokZuRyp8QAAAABJRU5ErkJggg=="
-                                                 width="16" height="16" />
-                                            <span class="caret"></span>
-                                    </button>
-                                            <!-- Contenido del menú desplegable -->
-                                            <ul class="dropdown-menu dropdown-menu-lg">
-                                                @foreach ($Portafolio as $p)
-                                                    <li>
-                                                        <a href="javascript:void(0)"
-                                                           data-product-id="{{ $i }}"
-                                                           data-product-codigo="{{ $p->codigo }}"
-                                                           data-product-nombre="{{ $p->nombre }}"
-                                                           data-product-cost-unit="{{ $p->cost_unit }}">
-                                                            <span style="font-weight: bold;">Nombre:</span> {{ $p->nombre }}<br>
-                                                            <span style="font-weight: bold;">Código:</span> {{ $p->codigo }}<br>
-                                                            <span style="font-weight: bold;">Costo Unitario:</span> ${{ number_format($p->cost_unit, 0, '.', '.') }} <!-- added currency format -->
-                                                        </a>
-                                                        <hr style="margin: 5px 0;">
-                                                    </li>
-                                                @endforeach
-                                            </ul>
+                                            <!-- Button to open the modal -->
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#productos-{{ $i }}">
+                                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMZJREFUSEvllUEKwkAMRd8/hQtBEBd6Gy/jxhvohTyIG3ei4MJbRFqoWNuZBOugaLfzk5f8ZDqi8KfC+ckCzGwJbIBFopADsJK0SxXqAa7AyOnyKGn2KsCqQEm9hZhZ9ryOzVXnJfDOW4CA39F9aM3l3oGZXYBxNEt0Lo8A188I/Nm2HwREbIhomtXuWBQJjmiSAO9SNck93fcBIrZUmj9Y09Tw3mHRGZhEEzm6k6Rp3990C8wHQvbAunnlPvsmD+ykDi/ewQ3bvokZuRyp8QAAAABJRU5ErkJggg=="
+                                                    width="16" height="16" />
+                                                <span class="caret"></span>
+                                            </button>
 
-                                            <style>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="productos-{{ $i }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            data-backdrop="static">
+                                            <div class="modal-dialog modal-lg" role="document" data-backdrop="static">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Portafolio</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table" style="border-collapse: collapse;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nombre</th>
+                                                                    <th>Código</th>
+                                                                    <th>Costo Unitario</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($Portafolio as $p)
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a href="javascript:void(0)"
+                                                                                data-product-id="{{ $i }}"
+                                                                                data-product-codigo="{{ $p->codigo }}"
+                                                                                data-product-nombre="{{ $p->nombre }}"
+                                                                                data-product-cost-unit="{{ $p->cost_unit }}">
+                                                                                {{ $p->nombre }}
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>{{ $p->codigo }}</td>
+                                                                        <td>${{ number_format($p->cost_unit, 0, '.', '.') }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            document.querySelectorAll('[id^="productos-"] table tbody tr td a').forEach(function(element) {
+                                                element.addEventListener('click', function() {
+                                                    var modal = element.closest('.modal');
+                                                    modal.classList.remove('show');
+                                                    modal.setAttribute('aria-hidden', 'true');
+                                                    var modalInstance = bootstrap.Modal.getInstance(modal);
+                                                    modalInstance.hide();
+                                                    modalInstance.dispose(); // Agregamos esta línea para cerrar el modal completamente
+                                                });
+                                            });
+                                        </script>
 
-                                            </style>
                                         </td>
                                         <!-- OC -->
                                         <td><input type="text" name="Fechas[{{ $i }}][2]"
@@ -511,11 +552,13 @@
 
                                         <!-- COSTO UNITARIO -->
                                         <td><input name="Fechas[{{ $i }}][7]" type="text"
-                                            class="rounded border" placeholder="0" value="{{ number_format($f->cost_unit, 0, ',', '.') }}"
-                                            pattern="[0-9.,]+"></td>
+                                                class="rounded border" placeholder="0"
+                                                value="{{ number_format($f->cost_unit, 0, ',', '.') }}"
+                                                pattern="[0-9.,]+"></td>
 
                                         <!-- COSTO TOTAL -->
-                                        <td><a oninput="handleInput(event)" placeholder="0">${{ number_format($f->cost_total, 0, ',', '.') }}</a></td>
+                                        <td><a oninput="handleInput(event)"
+                                                placeholder="0">${{ number_format($f->cost_total, 0, ',', '.') }}</a></td>
 
                                         <!-- BARRAS DE PROGRESO -->
                                         <td>

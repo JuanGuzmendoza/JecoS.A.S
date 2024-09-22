@@ -240,8 +240,10 @@ navLinks.forEach((link) => {
 });
 
 
+
 $(document).ready(function () {
-    $('.dropdown-menu li a').on('click', function () {
+    // Seleccionar todos los modales con id que comienza con "productos-"
+    $('[id^="productos-"] table tbody tr td a').on('click', function () {
         var productId = $(this).data('product-id');
         var productoCodigo = $(this).data('product-codigo');
         var productoNombre = $(this).data('product-nombre');
@@ -249,10 +251,18 @@ $(document).ready(function () {
 
         // Formatear el valor de productoCostUnit
         var formattedCostUnit = productoCostUnit.toLocaleString('es-ES', { minimumFractionDigits: 0});
+        console.log('Producto seleccionado:');
+        console.log('ID:', productId);
+        console.log('Código:', productoCodigo);
+        console.log('Nombre:', productoNombre);
+        console.log('Costo unitario:', formattedCostUnit);
+
+        // Obtener el id del modal que se acaba de abrir
+        var modalId = $(this).closest('.modal').attr('id');
 
         // Update the input fields with the selected product's information
-        $(this).closest('tr').find('input[name="Fechas[' + productId + '][7]"]').val(formattedCostUnit);
-        $(this).closest('tr').find('input[name="Fechas[' + productId + '][3]"]').val(productoCodigo);
-        $(this).closest('tr').find('input[name="Fechas[' + productId + '][4]"]').val(productoNombre);
+        $('input[name="Fechas[' + productId + '][7]"]').val(formattedCostUnit);
+        $('input[name="Fechas[' + productId + '][3]"]').val(productoCodigo);
+        $('input[name="Fechas[' + productId + '][4]"]').val(productoNombre);
     });
 });

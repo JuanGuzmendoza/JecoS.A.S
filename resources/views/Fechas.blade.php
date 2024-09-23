@@ -449,7 +449,7 @@
                         <tbody>
                             <?php
                             $i = 0;
-
+                            $indice_productos=1;
                             ?>
                             <!-- FILAS -->
                             <form action="{{ route('actualizar_registros', ['mes' => $mes, 'año' => $año]) }}"
@@ -463,8 +463,10 @@
                                         <td>
                                             <input type="hidden" name="Fechas[{{ $i }}][0]"
                                                 value="{{ $f->id }}">
-                                            {{ $f->id }}
-                                        </td>
+                                            {{ $indice_productos}}
+                                        </td><?php 
+                                        $indice_productos++;
+                                        ?>
                                         <td>{{ $f->cliente }}</td>
 
                                         <td><input name="Fechas[{{ $i }}][1]" type="date"
@@ -522,16 +524,16 @@
                                             </div>
                                         </div>
                                         <script>
-                                            document.querySelectorAll('[id^="productos-"] table tbody tr td a').forEach(function(element) {
-                                                element.addEventListener('click', function() {
-                                                    var modal = element.closest('.modal');
-                                                    modal.classList.remove('show');
-                                                    modal.setAttribute('aria-hidden', 'true');
-                                                    var modalInstance = bootstrap.Modal.getInstance(modal);
-                                                    modalInstance.hide();
-                                                    modalInstance.dispose(); // Agregamos esta línea para cerrar el modal completamente
-                                                });
-                                            });
+                                            // document.querySelectorAll('[id^="productos-"] table tbody tr td a').forEach(function(element) {
+                                            //     element.addEventListener('click', function() {
+                                            //         var modal = element.closest('.modal');
+                                            //         modal.classList.remove('show');
+                                            //         modal.setAttribute('aria-hidden', 'true');
+                                            //         var modalInstance = bootstrap.Modal.getInstance(modal);
+                                            //         modalInstance.hide();
+                                            //         modalInstance.dispose(); // Agregamos esta línea para cerrar el modal completamente
+                                            //     });
+                                            // });
                                         </script>
 
                                         </td>

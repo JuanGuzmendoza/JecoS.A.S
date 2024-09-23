@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Carbon\Carbon;
-
+use App\Models\portafolio_productos;
 class DataImport implements ToCollection, WithHeadingRow
 {
     public function collection(Collection $rows)
@@ -80,14 +80,31 @@ class DataImport implements ToCollection, WithHeadingRow
                     $año_actual++;
                 }
                 if ($row[$i] >= 1) {
-                    Fechasentrega::create([
-                        'cliente' => 'JAMAR',
-                        'codigo' => $row[1],
-                        'nombre' => $row[2],
-                        'cant' => $row[$i],
-                        'mes' =>  $m,
-                        'año' => $año_actual
-                    ]);
+                    $Similitud=portafolio_productos::select('oc',
+                    'codigo',
+                    'nombre',
+                    'cost_unit',)->where('codigo','=',$row[1])->get();
+                    if($Similitud->isEmpty()){
+                        Fechasentrega::create([
+                            'cliente' => 'JAMAR',
+                            'codigo' => $row[1],
+                            'nombre' => $row[2],
+                            'cant' => $row[$i],
+                            'mes' =>  $m,
+                            'año' => $año_actual
+                        ]);
+                    }else{
+                        Fechasentrega::create([
+                            'cliente' => 'JAMAR',
+                            'codigo' => $row[1],
+                            'nombre' => $row[2],
+                            'cant' => $row[$i],
+                            'cost_unit' => $Similitud[0]->cost_unit,
+                            'cost_total' => $Similitud[0]->cost_unit*$row[$i],
+                            'mes' =>  $m,
+                            'año' => $año_actual
+                        ]);
+                    }
                 }
                 $año_actual= date('Y');
                 $indice++;

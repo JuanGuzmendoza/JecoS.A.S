@@ -50,11 +50,17 @@ class FechasExport implements FromView, WithStyles, WithTitle
 
     public function view(): View
     {
+        $total=0;
+        $F=Fechasentrega::where([['mes', '=', $this->indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get();
+        foreach ($F as $Fechas) {
+            $total += $Fechas->cost_total;
+        }
         //cambiar la parte de mandar meses y año para solo usar la propia coleccion del modelo de fechas
         return view('export_fechas', [
             'Fechas' => Fechasentrega::where([['mes', '=', $this->indice[$this->mes]], ['año', '=', $this->año]])->orderBy('entrega', 'ASC')->get(),
             'mes' => $this->mes,
-            'año' => $this->año
+            'año' => $this->año,
+            'total'=>$total,
         ]);
     }
 

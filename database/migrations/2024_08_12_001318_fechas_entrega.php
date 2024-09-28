@@ -34,6 +34,7 @@ return new class extends Migration
             $table->integer('nieves')->nullable();
             $table->integer('mes');
             $table->integer('año');
+            $table->boolean('estado')->nullable();
             $table->timestamps();
         });
     }

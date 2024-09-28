@@ -276,7 +276,7 @@
                                         <td>{{ $f->cliente }}</td>
 
                                         <td><input name="Fechas[{{ $i }}][1]" type="date"
-                                                class="rounded border"value="{{ $f->entrega }}"></td>
+                                                class="rounded border"value="{{ $f->entrega }}" disabled></td>
 
                                         <!-- OC -->
                                         <td>{{ $f->oc }}</td>
@@ -290,7 +290,7 @@
                                         <!-- CANTIDAD -->
                                         <td><input class="rounded border"type="number "
                                                 name="Fechas[{{ $i }}][6]"
-                                                style="width: 60px ;"value="{{ $f->cant }}"></td>
+                                                style="width: 60px ;"value="{{ $f->cant }}" disabled></td>
 
 
                                         <!-- BARRAS DE PROGRESO -->
@@ -301,6 +301,7 @@
                                                     oninput="updateProgress(this.value, '-11{{ $f->id }}')">
                                             </div>
                                         </td>
+                                        
                                         <!-- Agrega los demás campos con el mismo formato -->
                                     </tr>
                                     <?php

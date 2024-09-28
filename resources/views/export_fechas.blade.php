@@ -47,5 +47,10 @@
                 <td>{{ $f->nieves }}</td>
             </tr>
         @endforeach
+        <tr style="font-weight: bold;">
+            <td colspan="7">Total</td>
+            <td>${{number_format($total, 0, '.', '.')}}</td>
+            <td colspan="11"></td>
+        </tr>
     </tbody>
 </table>

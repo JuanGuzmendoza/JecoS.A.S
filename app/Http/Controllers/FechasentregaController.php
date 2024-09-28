@@ -23,8 +23,8 @@ class FechasentregaController extends Controller
         foreach ($F as $Fechas) {
             $total += $Fechas->cost_total;
         }
-
-        return view('Fechas', ['Portafolio'=>$P,'Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total]);
+        $Entregados=Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año],['estado','=',1]])->count();
+        return view('Fechas', ['Portafolio'=>$P,'Fechas' => $F, 'mes' => $mes, 'año' => $año, 'total' => $total,'Entregados'=>$Entregados]);
     }
     public function index()
     {
@@ -47,6 +47,8 @@ class FechasentregaController extends Controller
         foreach ($Fechas_matric_admin as $fm) {
             $c_u = (float) str_replace(array('.', ','), '', $fm[7]);
             $cost_total =  $c_u * $fm[6];
+            $estado=0;
+            $estado = isset($fm[19]) && $fm[19];
             $F = Fechasentrega::find($fm[0]);
             $F->update([
                 'entrega'=> $fm[1],
@@ -67,8 +69,10 @@ class FechasentregaController extends Controller
                 'ensam' =>  $fm[16],
                 'despa' =>  $fm[17],
                 'nieves' =>  $fm[18],
+                'estado' =>  $estado,
             ]);
         }
+
         return redirect()->route('ver_año', ['mes' => $mes, 'año' => $año]);
     }
 
@@ -99,4 +103,11 @@ class FechasentregaController extends Controller
         }
         return view('FechaTrabajos', ['Fechas' => $Fechas_entrega_asc, 'mes' => $mes, 'año' => $año, 'total' => $total]);
     }
+    public function destroy($mes, $año, $id)
+{
+    $F = Fechasentrega::find($id);
+    $F->delete();
+    return redirect()->route('ver_año', ['mes' => $mes, 'año' => $año]);
 }
+}
+

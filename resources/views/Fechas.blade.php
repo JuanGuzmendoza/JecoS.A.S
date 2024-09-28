@@ -202,10 +202,10 @@
         <!-- /.modal -->
         <div id="option-bar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
             <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#portafolio"
-                title="Agregar nueva fila">
-                <i class="fa-solid fa-briefcase fa-2x"></i>
-                <p>Portafolio</p>
-            </button>
+            title="Agregar nueva fila">
+        <i class="fa-solid fa-briefcase fa-2x"></i>
+        <p>Portafolio</p>
+    </button>
             <button type="button" class="btn btn-light btn-icon" data-toggle="modal" data-target="#exampleModal"
                 title="Agregar nueva fila">
                 <i class="fa-solid fa-square-plus fa-2x"></i>
@@ -343,8 +343,9 @@
             </div>
         </div>
         </div>
+        
         <div id="mydatatable-container">
-            <h3 class="mb-5">Programacion de Fechas @switch($mes)
+            <h3 class="mb-">Programacion de Fechas @switch($mes)
                     @case(1)
                         Enero
                     @break
@@ -398,7 +399,7 @@
             </h3>
 
             <div class="g_botones">
-                <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample">
+                <button class="btn btn-primary" id="filtrar" data-toggle="collapse" data-target="#collapseExample">
                     Filtrar <i class="fa fa-chevron-down fa-xs" id="collapse-icon"></i>
 
                 </button>
@@ -462,8 +463,7 @@
                             <!-- FILAS -->
                             <form action="{{ route('actualizar_registros', ['mes' => $mes, 'año' => $año]) }}"
                                 method="GET">
-                                <button type="submit" class="btn btn-primary">Actualizar <span
-                                        id="changed-rows"></span></button>
+                                <button type="submit" id="refresh"><i class="fa-solid fa-arrows-rotate"></i>Actualizar<span id="changed-rows"></span>
                                 @csrf
                                 @foreach ($Fechas as $f)
                                     <tr data-id="{{ $f->id }}" onclick="">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="UTF-8">
-        <title>Login JECO S.A.S</title>
+        <title>Hello DefaultController!</title>
 
         <!-- Required meta tags -->
         @laravelPWA
@@ -22,7 +22,7 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     </head>
-<body>
+<body id="logBody">
 
 <div class="container-fluid rounded-lg border ">
     <div class="row">
@@ -49,7 +49,7 @@
                         </div>
                     @enderror
                 </div>
-                <button type="submit" class="sign-in">{{ __('Login') }}</button>
+                <button type="submit" id="sign-in">{{ __('Login') }}</button>
             </form>
         </div>
     </div>

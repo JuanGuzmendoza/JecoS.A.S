@@ -58,56 +58,6 @@ function handleInput(event) {
         input.value = '';
     }
 }
-function myFunction() {
-    // Obtener el valor de búsqueda
-    var input, filter, table, tr, accordion, cardHeaders, i, j, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-
-    // Filtrar en la vista de escritorio (tabla)
-    table = document.getElementById("myTable");
-    tr = table.getElementsByTagName("tr");
-
-    for (i = 0; i < tr.length; i++) {
-        var rowVisible = false;
-        var td = tr[i].getElementsByTagName("td");
-        for (j = 0; j < td.length; j++) {
-            if (td[j]) {
-                txtValue = td[j].textContent || td[j].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    rowVisible = true;
-                    break;
-                }
-            }
-        }
-        tr[i].style.display = rowVisible ? "" : "none";
-    }
-
-    // Filtrar en la vista móvil (accordion)
-    accordion = document.getElementById("accordionExample");
-    cardHeaders = accordion.getElementsByClassName("card-header");
-
-    for (i = 0; i < cardHeaders.length; i++) {
-        var cardVisible = false;
-        var cardBody = cardHeaders[i].nextElementSibling;
-        var paragraphs = cardBody.getElementsByTagName("p");
-
-        // Verifica si alguno de los párrafos en la card coincide con el filtro
-        for (j = 0; j < paragraphs.length; j++) {
-            if (paragraphs[j]) {
-                txtValue = paragraphs[j].textContent || paragraphs[j].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    cardVisible = true;
-                    break;
-                }
-            }
-        }
-
-        // Mostrar u ocultar el card (accordion)
-        cardHeaders[i].style.display = cardVisible ? "" : "none";
-    }
-}
-
 function selectRow(row) {
     // Deshabilita las entradas de todas las filas excepto la seleccionada
     document.querySelectorAll('.custom-table tr').forEach(tr => {
@@ -265,4 +215,45 @@ $(document).ready(function () {
         $('input[name="Fechas[' + productId + '][3]"]').val(productoCodigo);
         $('input[name="Fechas[' + productId + '][4]"]').val(productoNombre);
     });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const filterNameInput = document.getElementById('filter-name');
+    const filterClientInput = document.getElementById('filter-client');
+    const filterDateInput = document.getElementById('filter-date');
+    const clearFiltersButton = document.getElementById('clear-filters');
+    const table = document.getElementById('myTable');
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+    filterNameInput.addEventListener('input', filterTable);
+    filterClientInput.addEventListener('input', filterTable);
+    filterDateInput.addEventListener('input', filterTable);
+
+    clearFiltersButton.addEventListener('click', function() {
+        filterNameInput.value = '';
+        filterClientInput.value = '';
+        filterDateInput.value = '';
+        filterTable();
+    });
+
+    function filterTable() {
+        const filterName = filterNameInput.value.toLowerCase();
+        const filterClient = filterClientInput.value.toLowerCase();
+        const filterDate = filterDateInput.value;
+
+        rows.forEach(row => {
+            const name = row.children[6].textContent.toLowerCase();
+            const client = row.children[2].textContent.toLowerCase();
+            const date = row.children[3].querySelector('input').value;
+
+            const matchName = name.includes(filterName);
+            const matchClient = client.includes(filterClient);
+            const matchDate = date.includes(filterDate);
+
+            if (matchName && matchClient && matchDate) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
 });

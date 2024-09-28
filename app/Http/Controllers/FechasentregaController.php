@@ -91,7 +91,7 @@ class FechasentregaController extends Controller
 
     public function ver_año_areas($mes, $año)
     {
-        $Fechas_entrega_asc=$this->Modelo_fecha($mes,$año)->orderBy('entrega', 'ASC')->get();
+        $Fechas_entrega_asc=Fechasentrega::where([['mes', '=', $mes], ['año', '=', $año]])->orderBy('entrega', 'ASC')->get();
         $total = 0;
 
         foreach ($Fechas_entrega_asc as $Fechas) {

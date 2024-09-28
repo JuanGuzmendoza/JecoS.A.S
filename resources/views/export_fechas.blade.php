@@ -25,15 +25,15 @@
     </thead>
     <tbody>
         @foreach ($Fechas as $f)
-            <tr>
+        <tr>
                 <td>{{ $f->cliente }}</td>
                 <td>{{$f->entrega}}</td>
                 <td>{{ $f->oc }}</td>
                 <td>{{ $f->codigo }}</td>
                 <td>{{ $f->nombre }}</td>
                 <td>{{ $f->cant }}</td>
-                <td>{{ $f->cost_unit }}</td>
-                <td>{{ $f->cost_total }}</td>
+                <td>${{number_format($f->cost_unit, 0, '.', '.')}}</td>
+                <td>${{number_format($f->cost_total, 0, '.', '.')}} </td>
                 <td>{{ $f->c_tela }}</td>
                 <td>{{ $f->cost }}</td>
                 <td>{{ $f->c_mad }}</td>

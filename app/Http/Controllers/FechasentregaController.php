@@ -85,8 +85,6 @@ class FechasentregaController extends Controller
         foreach ($Fechas_matric_area as $fm) {
             $F = Fechasentrega::find($fm[0]);
             $F->update([
-                'entrega' => $fm[1],
-                'cant' => $fm[6],
                 $area =>  $fm[7],
             ]);
         }

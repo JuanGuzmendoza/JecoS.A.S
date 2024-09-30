@@ -225,23 +225,22 @@
                 <i class="fa-solid fa-file-export fa-2x"></i>
                 <p>Exportar excel</p>
             </button>
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->name }}
-            </a>
+            <div class="nav justify-content-center ml-auto">
+                <a id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }}
+                </a>
 
-
-            {{-- Boton de Logout --}}
-            <a class="dropdown-item" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
-
+   {{-- Boton de Logout --}}
+   <a class="logout" href="{{ route('logout') }}"
+   onclick="event.preventDefault();
+       document.getElementById('logout-form').submit();">
+<div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+<div class="text">  Logout</div>
+</a>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+   @csrf
+</form>
+</div>
 
         <div class="modal fade" id="exportarMesesModal" tabindex="-1" role="dialog"
             aria-labelledby="exportarMesesModalLabel" aria-hidden="true">
@@ -368,6 +367,7 @@
         <h3 class="text-center font-extrabold text-3xl mb-5">
             <span class="text-gray-900">Fechas</span>
             {{ $meses[$mes-1] }}
+            
         </h3>
         <style>
             h3 {
@@ -427,7 +427,7 @@
                             <h5 class="card-title">Ingreso Del Mes</h5>
                             <i class="fas fa-dollar-sign fa-2x"></i>
                         </div>
-                        <p class="display-4">${{ number_format($total, 0) }}</p>
+                        <p class="display-4">${{ number_format($total,0, '.', '.') }}</p>
                         {{-- <p class="card-text">
                                     <span class="text-success">
                                         <i class="fas fa-arrow-up"></i> 8.3%
@@ -445,19 +445,28 @@
 
 
                 <div class="g_botones">
-                    <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample">
+                    <button class="btn btn-primary" id="filtrar" data-toggle="collapse" data-target="#collapseExample">
                         Filtrar <i class="fa fa-chevron-down fa-xs" id="collapse-icon"></i>
 
                     </button>
 
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body border-0">
-                            <div class="group ">
-                                <input required="" type="text" class="input-per" id="myInput"
-                                    onkeyup="myFunction()">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label class="label-per">Nombre</label>
+                            <div class="row mb-3">
+                                <div class="col-md-2 filter-input">
+                                    <input type="text" id="filter-name" class="form-control" placeholder="Filtrar por Nombre">
+                                </div>
+                                <div class="col-md-2 filter-input">
+                                    <input type="text" id="filter-client" class="form-control" placeholder="Filtrar por Cliente">
+                                </div>
+                                <div class="col-md-2 filter-input">
+                                    <input type="date" id="filter-date" class="form-control" placeholder="Filtrar por Fecha de Entrega">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 filter-input">
+                                    <button id="clear-filters" class="btn btn-danger clear-filters-btn">Borrar Filtros</button>
+                                </div>
                             </div>
 
                         </div>
@@ -503,8 +512,7 @@
                                 <!-- FILAS -->
                                 <form action="{{ route('actualizar_registros', ['mes' => $mes, 'año' => $año]) }}"
                                     method="GET">
-                                    <button type="submit" class="btn btn-primary">Actualizar <span
-                                            id="changed-rows"></span></button>
+                                    <button type="submit" id="refresh"><i class="fa-solid fa-arrows-rotate"></i>Actualizar<span id="changed-rows"></span>
                                     @csrf
                                     @foreach ($Fechas as $f)
                                         <tr data-id="{{ $f->id }}" onclick="">

@@ -274,6 +274,7 @@
                             <form action="{{ route('actualizar_registros_area', ['mes' => $mes, 'año' => $año,'area'=>$area]) }}"
                                 method="GET">
                                 <button type="submit" id="refresh"><i class="fa-solid fa-arrows-rotate"></i>Actualizar<span id="changed-rows"></span>
+
                                 @csrf
                                 @foreach ($Fechas as $f)
                                     <tr data-id="{{ $f->id }}" onclick="">
@@ -281,7 +282,7 @@
                                         <td>
                                             <input type="hidden" name="Fechas[{{ $i }}][0]"
                                                 value="{{ $f->id }}">
-                                            {{ $f->id }}
+                                            {{ $i }}
                                         </td>
                                         <td>{{ $f->cliente }}</td>
 
